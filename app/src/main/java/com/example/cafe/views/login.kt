@@ -18,8 +18,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -71,72 +71,81 @@ fun login_screen() {
 
             Spacer(modifier = Modifier.height(15.dp))
 
-            Row (
+            Column (
                 modifier = Modifier
-                            .padding(horizontal = 20.dp, vertical = 0.dp)
+                    .background(Color(0xFFFFFFFF), shape = RoundedCornerShape(20.dp))
+                    .padding(10.dp)
+                    .width(320.dp)
             ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_email_24),
-                    contentDescription = "icono",
-                    tint = Color.White,
-                    modifier = Modifier.size(40.dp).align(Alignment.CenterVertically)
-                )
+                Row (
+                    modifier = Modifier
+                        .padding(horizontal = 10.dp, vertical = 0.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_email_24),
+                        contentDescription = "icono",
+                        tint = Color(0xFFB63B14),
+                        modifier = Modifier.size(40.dp).align(Alignment.CenterVertically)
+                    )
 
-                Spacer(modifier = Modifier.width(15.dp))
+                    Spacer(modifier = Modifier.width(15.dp))
 
-                TextField(
-                    value = user,
-                    onValueChange = { user = it },
-                    label = { Text("Correo Institucional") },
-                    colors = TextFieldDefaults.textFieldColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(20.dp),
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
+                    OutlinedTextField(
+                        value = user,
+                        onValueChange = { user = it },
+                        label = { Text("Correo Institucional") },
+                        colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = Color(0xFFB63B14), unfocusedBorderColor = Color(0xFFB63B14)),
+                        shape = RoundedCornerShape(20.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
 
-            Spacer(modifier = Modifier.height(15.dp))
+                Spacer(modifier = Modifier.height(5.dp))
 
-            Row (
-                modifier = Modifier
-                    .padding(horizontal = 20.dp, vertical = 0.dp)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.lock),
-                    contentDescription = "icono",
-                    tint = Color.White,
-                    modifier = Modifier.size(40.dp).align(Alignment.CenterVertically)
-                )
+                Row (
+                    modifier = Modifier
+                        .padding(horizontal = 10.dp, vertical = 0.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.lock),
+                        contentDescription = "icono",
+                        tint = Color(0xFFB63B14),
+                        modifier = Modifier.size(40.dp).align(Alignment.CenterVertically)
+                    )
 
-                Spacer(modifier = Modifier.width(15.dp))
+                    Spacer(modifier = Modifier.width(15.dp))
 
-                TextField(
-                    value = password,
-                    onValueChange = { password = it },
-                    label = { Text("Contraseña") },
-                    colors = TextFieldDefaults.textFieldColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(20.dp),
-                    visualTransformation = PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
+                    OutlinedTextField(
+                        value = password,
+                        onValueChange = { password = it },
+                        label = { Text("Contraseña") },
+                        colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = Color(0xFFB63B14), unfocusedBorderColor = Color(0xFFB63B14)),
+                        shape = RoundedCornerShape(20.dp),
+                        visualTransformation = PasswordVisualTransformation(),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
 
-            Spacer(modifier = Modifier.height(15.dp))
+                Spacer(modifier = Modifier.height(15.dp))
 
-            Button(
+                Button(
                     onClick = {},
-                    colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
+                    colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                         .fillMaxWidth()
-                        .padding(horizontal = 20.dp)
-            ) {
+                        .padding(horizontal = 30.dp)
+                ) {
                     Text(
                         text = "Iniciar Sesión",
-                        color = Color(0xFFB63B14),
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFFFFFFFF),
                         fontSize = 20.sp
                     )
                 }
+            }
+
         }
 
     }
