@@ -2,6 +2,7 @@ package com.example.cafe.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cafe.R
+import com.example.cafe.ui.theme.nexa
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
@@ -51,25 +53,26 @@ fun login_screen() {
             .fillMaxSize()
     ) {
         Column(
-            modifier = Modifier.align(Alignment.Center)
+            modifier = Modifier.align(Alignment.Center),
+            verticalArrangement = Arrangement.Center
         ) {
             Image(
                 painter = painterResource(id = R.drawable.delfin),
                 contentDescription = "Logo del IEST",
                 modifier = Modifier
-                    .size(100.dp)
+                    .size(120.dp)
                     .align(Alignment.CenterHorizontally)
             )
 
             Text(
                 text = "La Cafe",
                 color = Color(0xFFFFFFFF),
-                fontWeight = FontWeight.Bold,
-                fontSize = 45.sp,
+                fontSize = 75.sp,
+                fontFamily = nexa,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
 
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(5.dp))
 
             Column (
                 modifier = Modifier
@@ -79,23 +82,20 @@ fun login_screen() {
             ) {
                 Row (
                     modifier = Modifier
-                        .padding(horizontal = 10.dp, vertical = 0.dp)
+                        .padding(horizontal = 5.dp, vertical = 0.dp)
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_email_24),
-                        contentDescription = "icono",
-                        tint = Color(0xFFB63B14),
-                        modifier = Modifier.size(40.dp).align(Alignment.CenterVertically)
-                    )
-
-                    Spacer(modifier = Modifier.width(15.dp))
-
                     OutlinedTextField(
                         value = user,
                         onValueChange = { user = it },
                         label = { Text("Correo Institucional") },
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.baseline_email_24),
+                                contentDescription = "Mail",
+                                tint = Color(0xFFB63B14),
+                        )},
                         colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = Color(0xFFB63B14), unfocusedBorderColor = Color(0xFFB63B14)),
-                        shape = RoundedCornerShape(20.dp),
+                        shape = RoundedCornerShape(30.dp),
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -104,23 +104,20 @@ fun login_screen() {
 
                 Row (
                     modifier = Modifier
-                        .padding(horizontal = 10.dp, vertical = 0.dp)
+                        .padding(horizontal = 5.dp, vertical = 0.dp)
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.lock),
-                        contentDescription = "icono",
-                        tint = Color(0xFFB63B14),
-                        modifier = Modifier.size(40.dp).align(Alignment.CenterVertically)
-                    )
-
-                    Spacer(modifier = Modifier.width(15.dp))
-
                     OutlinedTextField(
                         value = password,
                         onValueChange = { password = it },
                         label = { Text("Contraseña") },
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.lock),
+                                contentDescription = "Password",
+                                tint = Color(0xFFB63B14),
+                            )},
                         colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = Color(0xFFB63B14), unfocusedBorderColor = Color(0xFFB63B14)),
-                        shape = RoundedCornerShape(20.dp),
+                        shape = RoundedCornerShape(30.dp),
                         visualTransformation = PasswordVisualTransformation(),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                         modifier = Modifier.fillMaxWidth()
@@ -144,6 +141,26 @@ fun login_screen() {
                         fontSize = 20.sp
                     )
                 }
+
+                Spacer(modifier = Modifier.height(5.dp))
+
+                Button(
+                    onClick = {},
+                    colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .fillMaxWidth()
+                        .padding(horizontal = 30.dp)
+                ) {
+                    Text(
+                        text = "O registrate ya",
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF000000),
+                        fontSize = 20.sp
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(5.dp))
             }
 
         }
