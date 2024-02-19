@@ -42,8 +42,11 @@ import com.example.cafe.ui.theme.nexa
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
-fun login_screen() {
+fun register_screen() {
     var mail by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
+    var lastname by remember { mutableStateOf("") }
+    var id_iest by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     Box(
@@ -97,6 +100,57 @@ fun login_screen() {
                 Spacer(modifier = Modifier.height(2.dp))
 
                 OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = { Text("Nombre") },
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_person_24),
+                            contentDescription = "User",
+                            tint = Color(0xFFB63B14),
+                        )},
+                    colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = Color(0xFFB63B14), unfocusedBorderColor = Color(0xFFB63B14)),
+                    shape = RoundedCornerShape(30.dp),
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
+                )
+
+                Spacer(modifier = Modifier.height(2.dp))
+
+                OutlinedTextField(
+                    value = lastname,
+                    onValueChange = { lastname = it },
+                    label = { Text("Apellido") },
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_person_24),
+                            contentDescription = "User",
+                            tint = Color(0xFFB63B14),
+                        )},
+                    colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = Color(0xFFB63B14), unfocusedBorderColor = Color(0xFFB63B14)),
+                    shape = RoundedCornerShape(30.dp),
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
+                )
+
+                Spacer(modifier = Modifier.height(2.dp))
+
+                OutlinedTextField(
+                    value = id_iest,
+                    onValueChange = { id_iest = it },
+                    label = { Text("ID IEST") },
+                    leadingIcon = {
+                        Icon(
+                            painter = painterResource(id = R.drawable.dolphin),
+                            contentDescription = "Dolphin",
+                            tint = Color(0xFFB63B14),
+                        )},
+                    colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = Color(0xFFB63B14), unfocusedBorderColor = Color(0xFFB63B14)),
+                    shape = RoundedCornerShape(30.dp),
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
+                )
+
+                Spacer(modifier = Modifier.height(2.dp))
+
+                OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
                     label = { Text("Contraseña") },
@@ -124,7 +178,7 @@ fun login_screen() {
                         .padding(horizontal = 30.dp)
                 ) {
                     Text(
-                        text = "Iniciar Sesión",
+                        text = "Registrarse",
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFFFFFFFF),
                         fontSize = 20.sp
@@ -142,7 +196,7 @@ fun login_screen() {
                         .padding(horizontal = 30.dp)
                 ) {
                     Text(
-                        text = "O registrate ya",
+                        text = "O inicia sesión",
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFF000000),
                         fontSize = 20.sp
