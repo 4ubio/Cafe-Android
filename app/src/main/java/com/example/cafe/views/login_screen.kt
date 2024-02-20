@@ -117,7 +117,9 @@ fun login_screen(navController: NavHostController) {
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Button(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate("ItemScreen")
+                    },
                     colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
