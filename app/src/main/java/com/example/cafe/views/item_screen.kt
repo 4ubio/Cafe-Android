@@ -41,10 +41,26 @@ fun item_screen(navController: NavHostController) {
         Column (
 
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.burger),
-                contentDescription = "Food"
-            )
+
+            Box () {
+                Image(
+                    painter = painterResource(id = R.drawable.burger),
+                    contentDescription = "Food"
+                )
+
+                Button(
+                    onClick = { navController.popBackStack() },
+                    colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
+                    modifier = Modifier.padding(15.dp).width(70.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_arrow_back_24),
+                        contentDescription = "Back",
+                        tint = Color(0xFF471608),
+                        modifier = Modifier.size(30.dp)
+                    )
+                }
+            }
 
             Spacer(modifier = Modifier.height(15.dp))
 
