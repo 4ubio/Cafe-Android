@@ -36,13 +36,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.cafe.R
 import com.example.cafe.ui.theme.nexa
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
 @Composable
-fun register_screen() {
+fun register_screen(navController: NavHostController) {
     var mail by remember { mutableStateOf("") }
     var name by remember { mutableStateOf("") }
     var lastname by remember { mutableStateOf("") }
@@ -94,7 +95,9 @@ fun register_screen() {
                         )},
                     colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = Color(0xFFB63B14), unfocusedBorderColor = Color(0xFFB63B14)),
                     shape = RoundedCornerShape(30.dp),
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 3.dp)
                 )
 
                 Spacer(modifier = Modifier.height(2.dp))
@@ -111,7 +114,9 @@ fun register_screen() {
                         )},
                     colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = Color(0xFFB63B14), unfocusedBorderColor = Color(0xFFB63B14)),
                     shape = RoundedCornerShape(30.dp),
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 3.dp)
                 )
 
                 Spacer(modifier = Modifier.height(2.dp))
@@ -128,7 +133,9 @@ fun register_screen() {
                         )},
                     colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = Color(0xFFB63B14), unfocusedBorderColor = Color(0xFFB63B14)),
                     shape = RoundedCornerShape(30.dp),
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 3.dp)
                 )
 
                 Spacer(modifier = Modifier.height(2.dp))
@@ -145,7 +152,9 @@ fun register_screen() {
                         )},
                     colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = Color(0xFFB63B14), unfocusedBorderColor = Color(0xFFB63B14)),
                     shape = RoundedCornerShape(30.dp),
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 3.dp)
                 )
 
                 Spacer(modifier = Modifier.height(2.dp))
@@ -164,7 +173,9 @@ fun register_screen() {
                     shape = RoundedCornerShape(30.dp),
                     visualTransformation = PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 3.dp)
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
@@ -188,7 +199,9 @@ fun register_screen() {
                 Spacer(modifier = Modifier.height(5.dp))
 
                 Button(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate("LoginScreen")
+                    },
                     colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
@@ -209,4 +222,10 @@ fun register_screen() {
         }
 
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_Register() {
+    register_screen(navController = rememberNavController())
 }

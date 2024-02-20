@@ -36,13 +36,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.cafe.R
 import com.example.cafe.ui.theme.nexa
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
 @Composable
-fun login_screen() {
+fun login_screen(navController: NavHostController) {
     var mail by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -134,7 +135,9 @@ fun login_screen() {
                 Spacer(modifier = Modifier.height(5.dp))
 
                 Button(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate("RegisterScreen")
+                    },
                     colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
@@ -155,4 +158,10 @@ fun login_screen() {
         }
 
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview_Login() {
+    login_screen(navController = rememberNavController())
 }
