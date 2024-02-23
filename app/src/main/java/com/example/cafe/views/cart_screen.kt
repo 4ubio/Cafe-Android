@@ -16,14 +16,17 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,24 +37,22 @@ import com.example.cafe.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun item_screen(navController: NavHostController) {
+fun cart_screen(navController: NavHostController) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         Column (
 
         ) {
-
-            Box () {
-                Image(
-                    painter = painterResource(id = R.drawable.burger),
-                    contentDescription = "Food"
-                )
-
+            Box (
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Button(
                     onClick = { navController.popBackStack() },
                     colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
-                    modifier = Modifier.padding(15.dp).width(70.dp)
+                    modifier = Modifier
+                        .padding(15.dp)
+                        .width(70.dp)
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_arrow_back_24),
@@ -60,90 +61,124 @@ fun item_screen(navController: NavHostController) {
                         modifier = Modifier.size(30.dp)
                     )
                 }
+
+                Text(
+                    text = "Carrito",
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.align(Alignment.Center)
+                )
             }
 
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Column (
+            Row (
                 modifier = Modifier
                     .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
                     .padding(10.dp)
                     .width(320.dp)
                     .align(Alignment.CenterHorizontally)
             ) {
-                Text(
-                    text = "Hamburguesa",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 30.sp,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                Text(
-                    text = "Deliciosa hamburguesa",
-                    fontSize = 20.sp,
-                )
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                Text(
-                    text = "Tiempo de preparación: 10 minutos",
-                    fontSize = 20.sp,
-                )
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                Text(
-                    text = "Estado: Disponible",
-                    fontSize = 20.sp,
-                )
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                Text(
-                    text = "Cantidad:",
-                    fontSize = 20.sp,
-                )
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                Button(
-                    onClick = {navController.navigate("CartScreen")},
-                    colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
+                Image(
+                    painter = painterResource(id = R.drawable.burger),
+                    contentDescription = "Food",
                     modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp)
+                        .weight(0.8f)
+                        .clip(shape = RoundedCornerShape(20.dp))
+                )
+
+                Spacer(modifier = Modifier.width(20.dp))
+
+                Column (
+                    modifier = Modifier
+                        .weight(1f)
+                        .align(Alignment.CenterVertically)
                 ) {
-                    Text(
-                        text = "Seleccionar     $70 mxn",
+                    Text (
+                        text = "Hamburguesa",
+                        fontSize = 22.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFFFFFFFF),
-                        fontSize = 20.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(5.dp))
+
+                    Text(
+                        text = "$70 mxn",
+                        fontSize = 18.sp,
+                        fontStyle = FontStyle.Italic
+                    )
+
+                    Spacer(modifier = Modifier.height(5.dp))
+
+                    Text(
+                        text = "Cantidad: 1",
+                        fontSize = 18.sp,
+                        fontStyle = FontStyle.Italic
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
-            Column (
+            Row (
                 modifier = Modifier
-                    .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
-                    .padding(10.dp)
-                    .width(320.dp)
-                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth()
+                    .padding(horizontal = 30.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Instrucciones especiales:",
+                    text = "Subtotal",
                     fontSize = 20.sp,
+                    fontStyle = FontStyle.Italic,
+                    fontWeight = FontWeight.Light
                 )
 
-                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = "$70 mxn",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Light
+                )
+            }
+
+            Spacer(modifier = Modifier.height(15.dp))
+
+            Divider(color = Color.Gray, thickness = 1.dp, modifier = Modifier.padding(horizontal = 30.dp))
+
+            Spacer(modifier = Modifier.height(15.dp))
+
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 30.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Total",
+                    fontSize = 20.sp,
+                    fontStyle = FontStyle.Italic,
+                    fontWeight = FontWeight.Bold
+                )
 
                 Text(
-                    text = "Sin cebolla, Sin tomate...",
-                    fontSize = 15.sp,
+                    text = "$70 mxn",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            Spacer(modifier = Modifier.height(15.dp))
+
+            Button(
+                onClick = {},
+                colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth()
+                    .padding(horizontal = 30.dp)
+            ) {
+                Text(
+                    text = "Realizar pago",
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFFFFFFFF),
+                    fontSize = 20.sp
                 )
             }
 
@@ -193,6 +228,6 @@ fun item_screen(navController: NavHostController) {
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_Item() {
-    item_screen(navController = rememberNavController())
+fun Preview_Cart() {
+    cart_screen(navController = rememberNavController())
 }
