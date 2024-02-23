@@ -6,8 +6,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.cafe.views.cart_screen
+import com.example.cafe.views.conf_screen
 import com.example.cafe.views.item_screen
 import com.example.cafe.views.login_screen
+import com.example.cafe.views.order_screen
 import com.example.cafe.views.register_screen
 
 @Composable
@@ -28,6 +30,14 @@ fun NavManager() {
 
         composable(route = "CartScreen") {
             cart_screen(navController)
+        }
+
+        composable(route = "ConfScreen") {
+            conf_screen(navController)
+        }
+
+        composable(route = "OrderScreen") {
+            order_screen(navController)
         }
     }
 }

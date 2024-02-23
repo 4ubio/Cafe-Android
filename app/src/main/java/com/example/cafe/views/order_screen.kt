@@ -19,6 +19,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,6 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,18 +39,16 @@ import com.example.cafe.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun cart_screen(navController: NavHostController) {
+fun order_screen(navController: NavHostController) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        Column (
-
-        ) {
+        Column {
             Box (
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Button(
-                    onClick = { navController.popBackStack() },
+                    onClick = {},
                     colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
                     modifier = Modifier
                         .padding(15.dp)
@@ -63,12 +63,24 @@ fun cart_screen(navController: NavHostController) {
                 }
 
                 Text(
-                    text = "Carrito",
+                    text = "Tu pedido",
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
+
+            Spacer(modifier = Modifier.height(5.dp))
+
+            Text(
+                text = "No. 12345",
+                fontSize = 25.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 30.dp)
+            )
+
+            Spacer(modifier = Modifier.height(15.dp))
 
             Row (
                 modifier = Modifier
@@ -125,14 +137,58 @@ fun cart_screen(navController: NavHostController) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Subtotal",
+                    text = "Recoger en:",
                     fontSize = 20.sp,
                     fontStyle = FontStyle.Italic,
                     fontWeight = FontWeight.Light
                 )
 
                 Text(
-                    text = "$70 mxn",
+                    text = "Café",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Light
+                )
+            }
+
+            Spacer(modifier = Modifier.height(5.dp))
+
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 30.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Fecha de pedido:",
+                    fontSize = 20.sp,
+                    fontStyle = FontStyle.Italic,
+                    fontWeight = FontWeight.Light
+                )
+
+                Text(
+                    text = "04/20/2024",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Light
+                )
+            }
+
+            Spacer(modifier = Modifier.height(5.dp))
+
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 30.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Hora de pedido:",
+                    fontSize = 20.sp,
+                    fontStyle = FontStyle.Italic,
+                    fontWeight = FontWeight.Light
+                )
+
+                Text(
+                    text = "16:20",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Light
                 )
@@ -164,25 +220,32 @@ fun cart_screen(navController: NavHostController) {
                 )
             }
 
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.weight(1f))
 
-            Button(
-                onClick = {navController.navigate("ConfScreen")},
-                colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .fillMaxWidth()
-                    .padding(horizontal = 30.dp)
+            Column (
+                modifier = Modifier.padding(horizontal = 30.dp)
             ) {
                 Text(
-                    text = "Realizar pago",
+                    text = "En preparación",
+                    fontSize = 25.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFFFFFFFF),
-                    fontSize = 20.sp
+                    textAlign = TextAlign.Center,
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                LinearProgressIndicator(
+                    progress = 0.33f,
+                    color = Color(0xFFB63B14),
+                    modifier = Modifier
+                        .height(35.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(Color(0xFFC7D0D8))
+                        .fillMaxWidth()
                 )
             }
 
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.height(30.dp))
 
             Row (
                 modifier = Modifier
@@ -228,6 +291,6 @@ fun cart_screen(navController: NavHostController) {
 
 @Preview(showBackground = true)
 @Composable
-fun Preview_Cart() {
-    cart_screen(navController = rememberNavController())
+fun Preview_Order() {
+    order_screen(navController = rememberNavController())
 }
