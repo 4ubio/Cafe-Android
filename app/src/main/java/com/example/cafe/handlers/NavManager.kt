@@ -9,6 +9,7 @@ import com.example.cafe.views.cart_screen
 import com.example.cafe.views.conf_screen
 import com.example.cafe.views.item_screen
 import com.example.cafe.views.login_screen
+import com.example.cafe.views.menu_screen
 import com.example.cafe.views.order_screen
 import com.example.cafe.views.register_screen
 
@@ -22,6 +23,10 @@ fun NavManager() {
 
         composable(route = "RegisterScreen") {
             register_screen(navController)
+        }
+
+        composable(route = "MenuScreen") {
+            menu_screen(navController)
         }
 
         composable(route = "ItemScreen") {

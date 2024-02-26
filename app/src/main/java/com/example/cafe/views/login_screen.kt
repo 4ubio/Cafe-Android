@@ -118,7 +118,7 @@ fun login_screen(navController: NavHostController) {
 
                 Button(
                     onClick = {
-                        navController.navigate("ItemScreen")
+                        navController.navigate("MenuScreen")
                     },
                     colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
                     modifier = Modifier
