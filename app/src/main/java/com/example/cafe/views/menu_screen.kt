@@ -48,7 +48,7 @@ fun menu_screen(navController: NavHostController) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Button(
-                    onClick = {},
+                    onClick = {navController.popBackStack()},
                     colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
                     modifier = Modifier
                         .padding(15.dp)

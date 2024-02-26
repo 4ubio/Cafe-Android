@@ -182,7 +182,7 @@ fun register_screen(navController: NavHostController) {
 
                 Button(
                     onClick = {
-                        navController.navigate("MenuScreen")
+                        navController.navigate("HomeScreen")
                     },
                     colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
                     modifier = Modifier
