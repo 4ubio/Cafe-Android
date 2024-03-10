@@ -83,7 +83,7 @@ fun conf_screen(navController: NavHostController) {
             Spacer(modifier = Modifier.height(20.dp))
 
             Button(
-                onClick = {navController.navigate("OrderScreen")},
+                onClick = {navController.navigate("OrdersScreen")},
                 colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -91,7 +91,7 @@ fun conf_screen(navController: NavHostController) {
                     .padding(horizontal = 30.dp)
             ) {
                 Text(
-                    text = "Ver status",
+                    text = "Ir a pedidos",
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFFFFFFFF),
                     fontSize = 20.sp
