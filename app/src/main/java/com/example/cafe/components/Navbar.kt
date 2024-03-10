@@ -1,6 +1,7 @@
 package com.example.cafe.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cafe.R
-import com.example.cafe.views.base_screen
 
 @Composable
 fun Navbar(navController: NavHostController) {
@@ -32,28 +32,36 @@ fun Navbar(navController: NavHostController) {
             painter = painterResource(id = R.drawable.baseline_home_24),
             contentDescription = "Home",
             tint = Color(0xFFFFFFFF),
-            modifier = Modifier.size(40.dp)
+            modifier = Modifier
+                .size(40.dp)
+                .clickable {navController.navigate("HomeScreen")}
         )
 
         Icon(
             painter = painterResource(id = R.drawable.baseline_view_list_24),
             contentDescription = "Orders",
             tint = Color(0xFFFFFFFF),
-            modifier = Modifier.size(40.dp)
+            modifier = Modifier
+                .size(40.dp)
+                .clickable {navController.navigate("OrdersScreen")}
         )
 
         Icon(
             painter = painterResource(id = R.drawable.baseline_shopping_cart_24),
             contentDescription = "Cart",
             tint = Color(0xFFFFFFFF),
-            modifier = Modifier.size(40.dp)
+            modifier = Modifier
+                .size(40.dp)
+                .clickable {navController.navigate("CartScreen")}
         )
 
         Icon(
             painter = painterResource(id = R.drawable.baseline_person_24),
             contentDescription = "User",
             tint = Color(0xFFFFFFFF),
-            modifier = Modifier.size(40.dp)
+            modifier = Modifier
+                .size(40.dp)
+                .clickable {navController.navigate("ProfileScreen")}
         )
     }
 }

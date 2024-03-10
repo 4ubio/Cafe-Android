@@ -12,12 +12,19 @@ import com.example.cafe.views.item_screen
 import com.example.cafe.views.login_screen
 import com.example.cafe.views.menu_screen
 import com.example.cafe.views.order_screen
+import com.example.cafe.views.orders_screen
+import com.example.cafe.views.profile_screen
 import com.example.cafe.views.register_screen
+import com.example.cafe.views.splash_screen
 
 @Composable
 fun NavManager() {
     var navController: NavHostController = rememberNavController()
-    NavHost(navController = navController, startDestination = "LoginScreen") {
+    NavHost(navController = navController, startDestination = "SplashScreen") {
+        composable(route = "SplashScreen") {
+            splash_screen(navController)
+        }
+
         composable(route = "LoginScreen") {
             login_screen(navController)
         }
@@ -38,16 +45,24 @@ fun NavManager() {
             item_screen(navController)
         }
 
-        composable(route = "CartScreen") {
-            cart_screen(navController)
-        }
-
         composable(route = "ConfScreen") {
             conf_screen(navController)
         }
 
+        composable(route = "OrdersScreen") {
+            orders_screen(navController)
+        }
+
         composable(route = "OrderScreen") {
             order_screen(navController)
+        }
+
+        composable(route = "CartScreen") {
+            cart_screen(navController)
+        }
+
+        composable(route = "ProfileScreen") {
+            profile_screen(navController)
         }
     }
 }
