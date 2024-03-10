@@ -3,7 +3,6 @@ package com.example.cafe.views
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,11 +11,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -39,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cafe.R
+import com.example.cafe.components.Navbar
 import com.example.cafe.ui.theme.nexa
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -84,7 +81,7 @@ fun home_screen(navController: NavHostController) {
                 modifier = Modifier
                     .padding(horizontal = 30.dp)
                     .clip(shape = RoundedCornerShape(25.dp))
-                    .clickable {navController.navigate("MenuScreen")}
+                    .clickable { navController.navigate("MenuScreen") }
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.cafe_background),
@@ -92,7 +89,9 @@ fun home_screen(navController: NavHostController) {
                     modifier = Modifier.onGloballyPositioned {sizeImage = it.size}
                 )
 
-                Box(modifier = Modifier.matchParentSize().background(gradient))
+                Box(modifier = Modifier
+                    .matchParentSize()
+                    .background(gradient))
 
                 Text(
                     text = "La Cafe",
@@ -120,7 +119,9 @@ fun home_screen(navController: NavHostController) {
                     modifier = Modifier.onGloballyPositioned {sizeImage = it.size}
                 )
 
-                Box(modifier = Modifier.matchParentSize().background(gradient))
+                Box(modifier = Modifier
+                    .matchParentSize()
+                    .background(gradient))
 
                 Text(
                     text = "Pérgola",
@@ -135,44 +136,7 @@ fun home_screen(navController: NavHostController) {
             }
 
             Spacer(modifier = Modifier.weight(1f))
-
-            Row (
-                modifier = Modifier
-                    .background(Color(0xFF471608), shape = RoundedCornerShape(20.dp))
-                    .width(340.dp)
-                    .padding(15.dp)
-                    .align(Alignment.CenterHorizontally),
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_home_24),
-                    contentDescription = "Home",
-                    tint = Color(0xFFFFFFFF),
-                    modifier = Modifier.size(40.dp)
-                )
-
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_view_list_24),
-                    contentDescription = "Orders",
-                    tint = Color(0xFFFFFFFF),
-                    modifier = Modifier.size(40.dp)
-                )
-
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_shopping_cart_24),
-                    contentDescription = "Cart",
-                    tint = Color(0xFFFFFFFF),
-                    modifier = Modifier.size(40.dp)
-                )
-
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_person_24),
-                    contentDescription = "User",
-                    tint = Color(0xFFFFFFFF),
-                    modifier = Modifier.size(40.dp)
-                )
-            }
-
+            Row (modifier = Modifier.padding(horizontal = 25.dp)) {Navbar(navController)}
             Spacer(modifier = Modifier.height(15.dp))
         }
     }

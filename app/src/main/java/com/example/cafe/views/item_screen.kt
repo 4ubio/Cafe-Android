@@ -2,7 +2,6 @@ package com.example.cafe.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cafe.R
+import com.example.cafe.components.Navbar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -148,44 +148,7 @@ fun item_screen(navController: NavHostController) {
             }
 
             Spacer(modifier = Modifier.weight(1f))
-
-            Row (
-                modifier = Modifier
-                    .background(Color(0xFF471608), shape = RoundedCornerShape(20.dp))
-                    .width(340.dp)
-                    .padding(15.dp)
-                    .align(Alignment.CenterHorizontally),
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_home_24),
-                    contentDescription = "Home",
-                    tint = Color(0xFFFFFFFF),
-                    modifier = Modifier.size(40.dp)
-                )
-
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_view_list_24),
-                    contentDescription = "Orders",
-                    tint = Color(0xFFFFFFFF),
-                    modifier = Modifier.size(40.dp)
-                )
-
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_shopping_cart_24),
-                    contentDescription = "Cart",
-                    tint = Color(0xFFFFFFFF),
-                    modifier = Modifier.size(40.dp)
-                )
-
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_person_24),
-                    contentDescription = "User",
-                    tint = Color(0xFFFFFFFF),
-                    modifier = Modifier.size(40.dp)
-                )
-            }
-
+            Row (modifier = Modifier.padding(horizontal = 25.dp)) { Navbar(navController) }
             Spacer(modifier = Modifier.height(15.dp))
         }
     }
