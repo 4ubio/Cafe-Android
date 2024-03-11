@@ -29,7 +29,7 @@ fun Navbar(navController: NavHostController) {
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.baseline_home_24),
+            painter = painterResource(id = R.drawable.home),
             contentDescription = "Home",
             tint = Color(0xFFFFFFFF),
             modifier = Modifier
@@ -38,7 +38,7 @@ fun Navbar(navController: NavHostController) {
         )
 
         Icon(
-            painter = painterResource(id = R.drawable.baseline_view_list_24),
+            painter = painterResource(id = R.drawable.list),
             contentDescription = "Orders",
             tint = Color(0xFFFFFFFF),
             modifier = Modifier
@@ -47,7 +47,7 @@ fun Navbar(navController: NavHostController) {
         )
 
         Icon(
-            painter = painterResource(id = R.drawable.baseline_shopping_cart_24),
+            painter = painterResource(id = R.drawable.cart),
             contentDescription = "Cart",
             tint = Color(0xFFFFFFFF),
             modifier = Modifier
@@ -56,7 +56,7 @@ fun Navbar(navController: NavHostController) {
         )
 
         Icon(
-            painter = painterResource(id = R.drawable.baseline_person_24),
+            painter = painterResource(id = R.drawable.person),
             contentDescription = "User",
             tint = Color(0xFFFFFFFF),
             modifier = Modifier

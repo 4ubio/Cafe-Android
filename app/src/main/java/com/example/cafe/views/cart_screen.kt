@@ -56,7 +56,7 @@ fun cart_screen(navController: NavHostController) {
                         .width(70.dp)
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.baseline_arrow_back_24),
+                        painter = painterResource(id = R.drawable.arrow_back),
                         contentDescription = "Back",
                         tint = Color(0xFF471608),
                         modifier = Modifier.size(30.dp)

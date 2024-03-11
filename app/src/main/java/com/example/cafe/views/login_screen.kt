@@ -86,7 +86,7 @@ fun login_screen(navController: NavHostController) {
                     label = { Text("Correo Institucional") },
                     leadingIcon = {
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_email_24),
+                            painter = painterResource(id = R.drawable.email),
                             contentDescription = "Mail",
                             tint = Color(0xFFB63B14),
                         )},

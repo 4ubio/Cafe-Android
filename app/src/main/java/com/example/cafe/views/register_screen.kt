@@ -89,7 +89,7 @@ fun register_screen(navController: NavHostController) {
                     label = { Text("Correo Institucional") },
                     leadingIcon = {
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_email_24),
+                            painter = painterResource(id = R.drawable.email),
                             contentDescription = "Mail",
                             tint = Color(0xFFB63B14),
                         )},
@@ -108,7 +108,7 @@ fun register_screen(navController: NavHostController) {
                     label = { Text("Nombre") },
                     leadingIcon = {
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_person_24),
+                            painter = painterResource(id = R.drawable.person),
                             contentDescription = "User",
                             tint = Color(0xFFB63B14),
                         )},
@@ -127,7 +127,7 @@ fun register_screen(navController: NavHostController) {
                     label = { Text("Apellido") },
                     leadingIcon = {
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_person_24),
+                            painter = painterResource(id = R.drawable.person),
                             contentDescription = "User",
                             tint = Color(0xFFB63B14),
                         )},

@@ -44,7 +44,7 @@ fun profile_screen(navController: NavHostController) {
             Spacer(modifier = Modifier.height(15.dp))
 
             Icon(
-                painter = painterResource(id = R.drawable.baseline_person_24),
+                painter = painterResource(id = R.drawable.person),
                 contentDescription = "User",
                 modifier = Modifier
                     .size(80.dp)
@@ -71,7 +71,7 @@ fun profile_screen(navController: NavHostController) {
                     .clickable { navController.navigate("OrdersScreen") }
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.baseline_view_list_24),
+                    painter = painterResource(id = R.drawable.list),
                     contentDescription = "Icon",
                     tint = Color(0xFFB63B14),
                     modifier = Modifier.size(30.dp)
@@ -97,7 +97,7 @@ fun profile_screen(navController: NavHostController) {
                     .clickable {}
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.baseline_settings_24),
+                    painter = painterResource(id = R.drawable.settings),
                     contentDescription = "Icon",
                     tint = Color(0xFFB63B14),
                     modifier = Modifier.size(30.dp)
@@ -123,7 +123,7 @@ fun profile_screen(navController: NavHostController) {
                     .clickable {}
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.baseline_card_giftcard),
+                    painter = painterResource(id = R.drawable.gift),
                     contentDescription = "Icon",
                     tint = Color(0xFFB63B14),
                     modifier = Modifier.size(30.dp)
@@ -149,7 +149,7 @@ fun profile_screen(navController: NavHostController) {
                     .clickable {}
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.baseline_notifications_24),
+                    painter = painterResource(id = R.drawable.notifications),
                     contentDescription = "Icon",
                     tint = Color(0xFFB63B14),
                     modifier = Modifier.size(30.dp)
@@ -175,7 +175,7 @@ fun profile_screen(navController: NavHostController) {
                     .clickable {}
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.baseline_add_comment_24),
+                    painter = painterResource(id = R.drawable.comment),
                     contentDescription = "Icon",
                     tint = Color(0xFFB63B14),
                     modifier = Modifier.size(30.dp)
@@ -201,7 +201,7 @@ fun profile_screen(navController: NavHostController) {
                     .clickable {}
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.baseline_people_24),
+                    painter = painterResource(id = R.drawable.people),
                     contentDescription = "Icon",
                     tint = Color(0xFFB63B14),
                     modifier = Modifier.size(30.dp)
@@ -227,7 +227,7 @@ fun profile_screen(navController: NavHostController) {
                     .clickable {}
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.baseline_logout_24),
+                    painter = painterResource(id = R.drawable.logout),
                     contentDescription = "Icon",
                     tint = Color(0xFFB63B14),
                     modifier = Modifier.size(30.dp)

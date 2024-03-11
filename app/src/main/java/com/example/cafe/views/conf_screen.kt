@@ -52,7 +52,7 @@ fun conf_screen(navController: NavHostController) {
                 horizontalArrangement = Arrangement.Center
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.baseline_celebration_24),
+                    painter = painterResource(id = R.drawable.celebration),
                     contentDescription = "Celeb",
                     tint = Color(0xFFFFFFFF),
                     modifier = Modifier
