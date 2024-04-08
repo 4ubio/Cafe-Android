@@ -98,8 +98,8 @@ fun menu_screen(navController: NavHostController, area: String) {
                         ) {
                             AsyncImage(
                                 model = "https://lacafe3.000webhostapp.com/food/${food.foto}",
-                                placeholder = painterResource(id = R.drawable.burger),
-                                error = painterResource(id = R.drawable.burger),
+                                placeholder = painterResource(id = R.drawable.food_icon),
+                                error = painterResource(id = R.drawable.food_icon),
                                 contentDescription = food.nombre,
                                 modifier = Modifier
                                     .weight(0.8f)
@@ -130,7 +130,20 @@ fun menu_screen(navController: NavHostController, area: String) {
                                 Spacer(modifier = Modifier.height(10.dp))
 
                                 Button(
-                                    onClick = { navController.navigate("ItemScreen") },
+                                    onClick = {
+                                        navController.navigate("ItemScreen" +
+                                                                        "/${food.id}" +
+                                                                        "/${food.nombre}" +
+                                                                        "/${food.foto}" +
+                                                                        "/${food.precio}" +
+                                                                        "/${food.descripcion}" +
+                                                                        "/${food.estado}" +
+                                                                        "/${food.tiempo}" +
+                                                                        "/${food.categoria}" +
+                                                                        "/${food.area}" +
+                                                                        "/${food.hora_fin}" +
+                                                                        "/${food.hora_inicio}"
+                                        )},
                                     colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
                                     modifier = Modifier.fillMaxWidth()
                                 ) {

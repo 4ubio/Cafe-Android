@@ -1,17 +1,18 @@
 package com.example.cafe.views
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -22,19 +23,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
 import com.example.cafe.R
 import com.example.cafe.components.Navbar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun item_screen(navController: NavHostController) {
+fun item_screen(
+    navController: NavHostController,
+    id: String,
+    nombre: String,
+    foto: String,
+    precio: String,
+    descripcion: String,
+    estado: String,
+    tiempo: String,
+    categoria: String,
+    area: String,
+    hora_fin: String,
+    hora_inicio: String,
+) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -43,9 +57,13 @@ fun item_screen(navController: NavHostController) {
         ) {
 
             Box () {
-                Image(
-                    painter = painterResource(id = R.drawable.burger),
-                    contentDescription = "Food"
+                AsyncImage(
+                    model = "https://lacafe3.000webhostapp.com/food/${foto}",
+                    placeholder = painterResource(id = R.drawable.food_icon),
+                    error = painterResource(id = R.drawable.food_icon),
+                    contentDescription = nombre,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxWidth().aspectRatio(16f / 9f)
                 )
 
                 Button(
@@ -68,11 +86,11 @@ fun item_screen(navController: NavHostController) {
                 modifier = Modifier
                     .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
                     .padding(10.dp)
-                    .width(320.dp)
+                    .widthIn(min = 300.dp, max = 380.dp)
                     .align(Alignment.CenterHorizontally)
             ) {
                 Text(
-                    text = "Hamburguesa",
+                    text = nombre,
                     fontWeight = FontWeight.Bold,
                     fontSize = 30.sp,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -81,21 +99,21 @@ fun item_screen(navController: NavHostController) {
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
-                    text = "Deliciosa hamburguesa",
+                    text = descripcion,
                     fontSize = 20.sp,
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
-                    text = "Tiempo de preparación: 10 minutos",
+                    text = "Tiempo de preparación: $tiempo minutos",
                     fontSize = 20.sp,
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
-                    text = "Estado: Disponible",
+                    text = "Estado: $estado",
                     fontSize = 20.sp,
                 )
 
@@ -117,34 +135,12 @@ fun item_screen(navController: NavHostController) {
                         .padding(horizontal = 20.dp)
                 ) {
                     Text(
-                        text = "Seleccionar     $70 mxn",
+                        text = "Seleccionar   $$precio mxn",
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFFFFFFFF),
                         fontSize = 20.sp
                     )
                 }
-            }
-
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Column (
-                modifier = Modifier
-                    .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
-                    .padding(10.dp)
-                    .width(320.dp)
-                    .align(Alignment.CenterHorizontally)
-            ) {
-                Text(
-                    text = "Instrucciones especiales:",
-                    fontSize = 20.sp,
-                )
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                Text(
-                    text = "Sin cebolla, Sin tomate...",
-                    fontSize = 15.sp,
-                )
             }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -154,8 +150,8 @@ fun item_screen(navController: NavHostController) {
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun Preview_Item() {
-    item_screen(navController = rememberNavController())
+    //item_screen(navController = rememberNavController())
 }
