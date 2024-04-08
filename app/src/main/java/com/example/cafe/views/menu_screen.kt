@@ -39,11 +39,11 @@ import com.example.cafe.viewmodels.FoodViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun menu_screen(navController: NavHostController) {
+fun menu_screen(navController: NavHostController, area: String) {
 
     //Load Menu
     val viewModel = FoodViewModel()
-    viewModel.getMenuList()
+    viewModel.getMenuList(area)
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -70,7 +70,7 @@ fun menu_screen(navController: NavHostController) {
                 }
 
                 Text(
-                    text = "La Cafe",
+                    text = area,
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.align(Alignment.Center)
@@ -85,6 +85,7 @@ fun menu_screen(navController: NavHostController) {
                     modifier = Modifier
                         .fillMaxHeight()
                         .padding(15.dp)
+                        .weight(30f)
                 ) {
                     items(viewModel.menu) { food ->
                         Row(
@@ -158,5 +159,5 @@ fun menu_screen(navController: NavHostController) {
 //@Preview(showBackground = true)
 @Composable
 fun Preview_Menu() {
-    menu_screen(navController = rememberNavController())
+    menu_screen(navController = rememberNavController(), area = "Café")
 }

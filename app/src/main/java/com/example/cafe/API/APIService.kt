@@ -4,12 +4,15 @@ import com.example.cafe.models.Food
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
-const val BASE_URL = "https://cafe3api.000webhostapp.com/getMenu.php/"
+const val BASE_URL = "https://lacafe3.000webhostapp.com/API/getMenu.php/"
 
 interface APIService {
     @GET("menu")
-    suspend fun getMenu(): List<Food>
+    suspend fun getMenu(
+        @Query("area") area:String,
+    ): List<Food>
 
     companion object {
         var apiService: APIService? = null

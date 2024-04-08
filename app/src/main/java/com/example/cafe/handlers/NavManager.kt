@@ -2,9 +2,11 @@ package com.example.cafe.handlers
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.cafe.views.cart_screen
 import com.example.cafe.views.conf_screen
 import com.example.cafe.views.home_screen
@@ -37,8 +39,13 @@ fun NavManager() {
             home_screen(navController)
         }
 
-        composable(route = "MenuScreen") {
-            menu_screen(navController)
+        composable(route = "MenuScreen/{area}", arguments =
+            listOf(
+                navArgument("area") {type = NavType.StringType},
+            )) {
+            parameters ->
+                val area = parameters.arguments?.getString("area") ?: ""
+            menu_screen(navController, area)
         }
 
         composable(route = "ItemScreen") {

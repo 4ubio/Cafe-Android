@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -77,62 +79,128 @@ fun home_screen(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            Box (
+            Column (
                 modifier = Modifier
-                    .padding(horizontal = 30.dp)
-                    .clip(shape = RoundedCornerShape(25.dp))
-                    .clickable { navController.navigate("MenuScreen") }
+                    .verticalScroll(rememberScrollState())
+                    .weight(30f)
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.cafe_background),
-                    contentDescription = "Loc",
-                    modifier = Modifier.onGloballyPositioned {sizeImage = it.size}
-                )
-
-                Box(modifier = Modifier
-                    .matchParentSize()
-                    .background(gradient))
-
-                Text(
-                    text = "La Cafe",
-                    fontSize = 55.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = nexa,
-                    color = Color(0xFFFFFFFF),
+                Box (
                     modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(horizontal = 30.dp, vertical = 10.dp)
-                )
-            }
+                        .padding(horizontal = 30.dp)
+                        .clip(shape = RoundedCornerShape(25.dp))
+                        .clickable { navController.navigate("MenuScreen/Café") }
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.cafe_background),
+                        contentDescription = "Loc",
+                        modifier = Modifier.onGloballyPositioned {sizeImage = it.size}
+                    )
 
-            Spacer(modifier = Modifier.height(20.dp))
+                    Box(modifier = Modifier
+                        .matchParentSize()
+                        .background(gradient))
 
-            Box (
-                modifier = Modifier
-                    .padding(horizontal = 30.dp)
-                    .clip(shape = RoundedCornerShape(25.dp))
-                    .clickable {}
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.cafe_background),
-                    contentDescription = "Loc",
-                    modifier = Modifier.onGloballyPositioned {sizeImage = it.size}
-                )
+                    Text(
+                        text = "La Café",
+                        fontSize = 55.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = nexa,
+                        color = Color(0xFFFFFFFF),
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(horizontal = 30.dp, vertical = 10.dp)
+                    )
+                }
 
-                Box(modifier = Modifier
-                    .matchParentSize()
-                    .background(gradient))
+                Spacer(modifier = Modifier.height(20.dp))
 
-                Text(
-                    text = "Pérgola",
-                    fontSize = 55.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = nexa,
-                    color = Color(0xFFFFFFFF),
+                Box (
                     modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(horizontal = 30.dp, vertical = 10.dp)
-                )
+                        .padding(horizontal = 30.dp)
+                        .clip(shape = RoundedCornerShape(25.dp))
+                        .clickable { navController.navigate("MenuScreen/Pérgola") }
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.cafe_background),
+                        contentDescription = "Loc",
+                        modifier = Modifier.onGloballyPositioned {sizeImage = it.size}
+                    )
+
+                    Box(modifier = Modifier
+                        .matchParentSize()
+                        .background(gradient))
+
+                    Text(
+                        text = "Pérgola",
+                        fontSize = 55.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = nexa,
+                        color = Color(0xFFFFFFFF),
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(horizontal = 30.dp, vertical = 10.dp)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Box (
+                    modifier = Modifier
+                        .padding(horizontal = 30.dp)
+                        .clip(shape = RoundedCornerShape(25.dp))
+                        .clickable { navController.navigate("MenuScreen/Snacks") }
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.cafe_background),
+                        contentDescription = "Loc",
+                        modifier = Modifier.onGloballyPositioned {sizeImage = it.size}
+                    )
+
+                    Box(modifier = Modifier
+                        .matchParentSize()
+                        .background(gradient))
+
+                    Text(
+                        text = "Snacks",
+                        fontSize = 55.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = nexa,
+                        color = Color(0xFFFFFFFF),
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(horizontal = 30.dp, vertical = 10.dp)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Box (
+                    modifier = Modifier
+                        .padding(horizontal = 30.dp)
+                        .clip(shape = RoundedCornerShape(25.dp))
+                        .clickable { navController.navigate("MenuScreen/Paninis") }
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.cafe_background),
+                        contentDescription = "Loc",
+                        modifier = Modifier.onGloballyPositioned {sizeImage = it.size}
+                    )
+
+                    Box(modifier = Modifier
+                        .matchParentSize()
+                        .background(gradient))
+
+                    Text(
+                        text = "Paninis",
+                        fontSize = 55.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = nexa,
+                        color = Color(0xFFFFFFFF),
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(horizontal = 30.dp, vertical = 10.dp)
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.weight(1f))

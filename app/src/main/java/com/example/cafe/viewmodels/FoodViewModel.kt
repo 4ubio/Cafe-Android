@@ -17,12 +17,12 @@ class FoodViewModel : ViewModel() {
     val menu: List<Food>
         get() = _menu
 
-    fun getMenuList() {
+    fun getMenuList(area: String) {
         viewModelScope.launch {
             val apiService = APIService.getInstance()
             try {
                 _menu.clear()
-                _menu.addAll(apiService.getMenu())
+                _menu.addAll(apiService.getMenu(area))
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
             }
