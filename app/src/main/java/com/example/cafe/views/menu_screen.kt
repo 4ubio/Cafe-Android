@@ -1,6 +1,5 @@
 package com.example.cafe.views
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
 import com.example.cafe.R
 import com.example.cafe.components.Navbar
 import com.example.cafe.viewmodels.FoodViewModel
@@ -96,8 +96,10 @@ fun menu_screen(navController: NavHostController, area: String) {
                                 .align(Alignment.CenterHorizontally),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.burger),
+                            AsyncImage(
+                                model = "https://lacafe3.000webhostapp.com/food/${food.foto}",
+                                placeholder = painterResource(id = R.drawable.burger),
+                                error = painterResource(id = R.drawable.burger),
                                 contentDescription = food.nombre,
                                 modifier = Modifier
                                     .weight(0.8f)
