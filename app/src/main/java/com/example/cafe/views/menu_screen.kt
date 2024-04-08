@@ -6,12 +6,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -26,18 +29,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cafe.R
 import com.example.cafe.components.Navbar
+import com.example.cafe.viewmodels.FoodViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun menu_screen(navController: NavHostController) {
+
+    //Load Menu
+    val viewModel = FoodViewModel()
+    viewModel.getMenuList()
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -72,134 +79,73 @@ fun menu_screen(navController: NavHostController) {
 
             Spacer(modifier = Modifier.height(5.dp))
 
-            Text(
-                text = "Rápida",
-                fontSize = 25.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 30.dp)
-            )
-
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Row (
-                modifier = Modifier
-                    .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
-                    .padding(horizontal = 10.dp, vertical = 20.dp)
-                    .width(320.dp)
-                    .align(Alignment.CenterHorizontally),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.burger),
-                    contentDescription = "Food",
+            //Display Menu
+            if (viewModel.errorMessage.isEmpty()) {
+                LazyColumn(
                     modifier = Modifier
-                        .weight(0.8f)
-                        .clip(shape = RoundedCornerShape(20.dp))
-                )
-
-                Spacer(modifier = Modifier.width(20.dp))
-
-                Column (
-                    modifier = Modifier
-                        .weight(1f)
-                        .align(Alignment.CenterVertically)
+                        .fillMaxHeight()
+                        .padding(15.dp)
                 ) {
-                    Text (
-                        text = "Hamburguesa",
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold,
-                    )
+                    items(viewModel.menu) { food ->
+                        Row(
+                            modifier = Modifier
+                                .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
+                                .padding(horizontal = 10.dp, vertical = 20.dp)
+                                .fillMaxWidth()
+                                .align(Alignment.CenterHorizontally),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.burger),
+                                contentDescription = food.nombre,
+                                modifier = Modifier
+                                    .weight(0.8f)
+                                    .clip(shape = RoundedCornerShape(20.dp))
+                            )
 
-                    Spacer(modifier = Modifier.height(5.dp))
+                            Spacer(modifier = Modifier.width(20.dp))
 
-                    Text(
-                        text = "$70 mxn",
-                        fontSize = 18.sp,
-                        fontStyle = FontStyle.Italic
-                    )
+                            Column(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .align(Alignment.CenterVertically)
+                            ) {
+                                Text(
+                                    text = food.nombre,
+                                    fontSize = 22.sp,
+                                    fontWeight = FontWeight.Bold,
+                                )
 
-                    Spacer(modifier = Modifier.height(10.dp))
+                                Spacer(modifier = Modifier.height(5.dp))
 
-                    Button(
-                        onClick = {navController.navigate("ItemScreen")},
-                        colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(
-                            text = "Seleccionar",
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFFFFFFFF),
-                            fontSize = 15.sp
-                        )
+                                Text(
+                                    text = "$${food.precio} mxn",
+                                    fontSize = 18.sp,
+                                    fontStyle = FontStyle.Italic
+                                )
+
+                                Spacer(modifier = Modifier.height(10.dp))
+
+                                Button(
+                                    onClick = { navController.navigate("ItemScreen") },
+                                    colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text(
+                                        text = "Seleccionar",
+                                        fontWeight = FontWeight.Bold,
+                                        color = Color(0xFFFFFFFF),
+                                        fontSize = 15.sp
+                                    )
+                                }
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(15.dp))
                     }
                 }
-            }
-
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Text(
-                text = "Méxicana",
-                fontSize = 25.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 30.dp)
-            )
-
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Row (
-                modifier = Modifier
-                    .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
-                    .padding(horizontal = 10.dp, vertical = 20.dp)
-                    .width(320.dp)
-                    .align(Alignment.CenterHorizontally),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.chilaquiles),
-                    contentDescription = "Food",
-                    modifier = Modifier
-                        .weight(0.8f)
-                        .clip(shape = RoundedCornerShape(20.dp))
-                )
-
-                Spacer(modifier = Modifier.width(20.dp))
-
-                Column (
-                    modifier = Modifier
-                        .weight(1f)
-                        .align(Alignment.CenterVertically)
-                ) {
-                    Text (
-                        text = "Chilaquiles de Pollo",
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold,
-                    )
-
-                    Spacer(modifier = Modifier.height(5.dp))
-
-                    Text(
-                        text = "$75 mxn",
-                        fontSize = 18.sp,
-                        fontStyle = FontStyle.Italic
-                    )
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    Button(
-                        onClick = {},
-                        colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(
-                            text = "Seleccionar",
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFFFFFFFF),
-                            fontSize = 15.sp
-                        )
-                    }
-                }
+            } else {
+                Text(viewModel.errorMessage)
             }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -209,7 +155,7 @@ fun menu_screen(navController: NavHostController) {
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun Preview_Menu() {
     menu_screen(navController = rememberNavController())
