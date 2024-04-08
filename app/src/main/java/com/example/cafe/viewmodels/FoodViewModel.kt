@@ -14,8 +14,8 @@ class FoodViewModel : ViewModel() {
 
     private val _menu = mutableStateListOf<Food>()
     var errorMessage: String by mutableStateOf("")
-    val menu: List<Food>
-        get() = _menu
+
+    val menu: List<Food> get() = _menu
 
     fun getMenuList(area: String) {
         viewModelScope.launch {

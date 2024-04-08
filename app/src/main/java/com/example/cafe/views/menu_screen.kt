@@ -48,9 +48,7 @@ fun menu_screen(navController: NavHostController, area: String) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        Column (
-            
-        ) {
+        Column {
             Box (
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -90,7 +88,10 @@ fun menu_screen(navController: NavHostController, area: String) {
                     items(viewModel.menu) { food ->
                         Row(
                             modifier = Modifier
-                                .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
+                                .background(
+                                    Color(0xFFD2CECE),
+                                    shape = RoundedCornerShape(20.dp)
+                                )
                                 .padding(horizontal = 10.dp, vertical = 20.dp)
                                 .fillMaxWidth()
                                 .align(Alignment.CenterHorizontally),
@@ -131,19 +132,21 @@ fun menu_screen(navController: NavHostController, area: String) {
 
                                 Button(
                                     onClick = {
-                                        navController.navigate("ItemScreen" +
-                                                                        "/${food.id}" +
-                                                                        "/${food.nombre}" +
-                                                                        "/${food.foto}" +
-                                                                        "/${food.precio}" +
-                                                                        "/${food.descripcion}" +
-                                                                        "/${food.estado}" +
-                                                                        "/${food.tiempo}" +
-                                                                        "/${food.categoria}" +
-                                                                        "/${food.area}" +
-                                                                        "/${food.hora_fin}" +
-                                                                        "/${food.hora_inicio}"
-                                        )},
+                                        navController.navigate(
+                                            "ItemScreen" +
+                                                    "/${food.id}" +
+                                                    "/${food.nombre}" +
+                                                    "/${food.foto}" +
+                                                    "/${food.precio}" +
+                                                    "/${food.descripcion}" +
+                                                    "/${food.estado}" +
+                                                    "/${food.tiempo}" +
+                                                    "/${food.categoria}" +
+                                                    "/${food.area}" +
+                                                    "/${food.hora_fin}" +
+                                                    "/${food.hora_inicio}"
+                                        )
+                                    },
                                     colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
                                     modifier = Modifier.fillMaxWidth()
                                 ) {
@@ -164,9 +167,9 @@ fun menu_screen(navController: NavHostController, area: String) {
                 Text(viewModel.errorMessage)
             }
 
-            Spacer(modifier = Modifier.weight(1f))
-            Row (modifier = Modifier.padding(horizontal = 25.dp)) { Navbar(navController) }
-            Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = Modifier.weight(1f))
+        Row (modifier = Modifier.padding(horizontal = 25.dp)) { Navbar(navController) }
+        Spacer(modifier = Modifier.height(15.dp))
         }
     }
 }
