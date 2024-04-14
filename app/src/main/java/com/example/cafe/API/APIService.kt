@@ -23,12 +23,10 @@ interface APIService {
     companion object {
         var apiService: APIService? = null
         fun getInstance(route: String): APIService {
-            if (apiService == null) {
-                apiService = Retrofit.Builder()
-                    .baseUrl(BASE_URL + route)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build().create(APIService::class.java)
-            }
+            apiService = Retrofit.Builder()
+                .baseUrl(BASE_URL + route)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build().create(APIService::class.java)
             return apiService!!
         }
     }
