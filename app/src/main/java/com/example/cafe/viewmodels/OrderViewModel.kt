@@ -7,23 +7,23 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cafe.API.APIService
-import com.example.cafe.models.Food
+import com.example.cafe.models.Order
 import kotlinx.coroutines.launch
 
-class FoodViewModel : ViewModel() {
+class OrderViewModel : ViewModel() {
 
-    private val _menu = mutableStateListOf<Food>()
+    private val _orders = mutableStateListOf<Order>()
     var errorMessage: String by mutableStateOf("")
 
-    val menu: List<Food> get() = _menu
+    val orders: List<Order> get() = _orders
 
-    fun getMenuList(area: String) {
+    fun getOrdersList(id_iest: String) {
         viewModelScope.launch {
-            val route = "getMenu.php/"
+            val route = "getOrders.php/"
             val apiService = APIService.getInstance(route)
             try {
-                _menu.clear()
-                _menu.addAll(apiService.getMenu(area))
+                _orders.clear()
+                _orders.addAll(apiService.getOrders(id_iest))
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
             }
