@@ -73,7 +73,7 @@ fun conf_screen(navController: NavHostController) {
             Spacer(modifier = Modifier.height(20.dp))
 
             Text(
-                text = "Tu orden #12345 ha sido recibida correctamente  y pronto podrás pasar por tu pedido.",
+                text = "Tu orden ha sido recibida correctamente  y pronto podrás pasar por tu pedido.",
                 textAlign = TextAlign.Center,
                 fontSize = 20.sp,
                 fontStyle = FontStyle.Italic,

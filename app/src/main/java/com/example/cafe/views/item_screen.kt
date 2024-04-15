@@ -45,7 +45,7 @@ fun item_screen(navController: NavHostController, id: String) {
     val viewModel = FoodViewModel()
     viewModel.getFoodItem(id)
 
-    val cantidad = "2"
+    val cantidad = "1"
 
     Box(
         modifier = Modifier.fillMaxSize()
