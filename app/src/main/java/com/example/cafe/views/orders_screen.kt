@@ -62,7 +62,7 @@ fun orders_screen(navController: NavHostController) {
             )
 
             //Display Menu
-            if (viewModel.errorMessage.isEmpty()) {
+            if (viewModel.errorMessage_orders.isEmpty()) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -127,7 +127,7 @@ fun orders_screen(navController: NavHostController) {
                                 Spacer(modifier = Modifier.height(5.dp))
 
                                 Button(
-                                    onClick = {navController.navigate("OrderScreen")},
+                                    onClick = {navController.navigate("OrderScreen/${order.id}")},
                                     colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
                                     modifier = Modifier.fillMaxWidth()
                                 ) {

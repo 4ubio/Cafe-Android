@@ -66,8 +66,14 @@ fun NavManager() {
             orders_screen(navController)
         }
 
-        composable(route = "OrderScreen") {
-            order_screen(navController)
+        composable(route = "OrderScreen/{id}", arguments =
+            listOf(
+                navArgument("id") {type = NavType.StringType}
+        )) {
+                parameters ->
+                    val id = parameters.arguments?.getString("id") ?: ""
+
+            order_screen(navController, id)
         }
 
         composable(route = "CartScreen") {

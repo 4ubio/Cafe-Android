@@ -13,9 +13,12 @@ import kotlinx.coroutines.launch
 class OrderViewModel : ViewModel() {
 
     private val _orders = mutableStateListOf<Order>()
-    var errorMessage: String by mutableStateOf("")
-
+    var errorMessage_orders: String by mutableStateOf("")
     val orders: List<Order> get() = _orders
+
+    private val _order = mutableStateListOf<Order>()
+    var errorMessage_order: String by mutableStateOf("")
+    val order: List<Order> get() = _order
 
     fun getOrdersList(id_iest: String) {
         viewModelScope.launch {
@@ -25,7 +28,20 @@ class OrderViewModel : ViewModel() {
                 _orders.clear()
                 _orders.addAll(apiService.getOrders(id_iest))
             } catch (e: Exception) {
-                errorMessage = e.message.toString()
+                errorMessage_orders = e.message.toString()
+            }
+        }
+    }
+
+    fun getOrderItem(id: String) {
+        viewModelScope.launch {
+            val route = "getOrder.php/"
+            val apiService = APIService.getInstance(route)
+            try {
+                _order.clear()
+                _order.addAll(apiService.getOrder(id))
+            } catch (e: Exception) {
+                errorMessage_order = e.message.toString()
             }
         }
     }
