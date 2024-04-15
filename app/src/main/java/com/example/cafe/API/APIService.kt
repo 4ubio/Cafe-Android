@@ -2,6 +2,7 @@ package com.example.cafe.API
 
 import com.example.cafe.models.Food
 import com.example.cafe.models.Order
+import com.example.cafe.models.OrderResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -29,6 +30,14 @@ interface APIService {
     suspend fun getOrder(
         @Query("id") id:String,
     ): List<Order>
+
+    @GET("order_response")
+    suspend fun setOrder(
+        @Query("id_producto") id_producto:String,
+        @Query("cantidad") cantidad:String,
+        @Query("id_iest") id_iest:String,
+        @Query("cliente") cliente:String,
+    ): List<OrderResponse>
 
     companion object {
         var apiService: APIService? = null

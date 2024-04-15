@@ -17,7 +17,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,8 +33,20 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.cafe.R
 import com.example.cafe.components.Navbar
+import com.example.cafe.viewmodels.OrderViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+fun createOrder(
+    navController: NavHostController,
+    id_producto: String,
+    cantidad: String,
+    id_iest: String,
+    cliente: String
+) {
+    val viewModel = OrderViewModel()
+    viewModel.setUserOrder(id_producto, cantidad, id_iest, cliente)
+    navController.navigate("ConfScreen")
+}
+
 @Composable
 fun cart_screen(
     navController: NavHostController,
@@ -45,6 +56,9 @@ fun cart_screen(
     precio: String,
     cantidad: String
 ) {
+
+    val cliente = "Sebastián Rubio Quiroz"
+    val id_iest = "19666"
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -178,7 +192,9 @@ fun cart_screen(
             Spacer(modifier = Modifier.height(15.dp))
 
             Button(
-                onClick = {navController.navigate("ConfScreen")},
+                onClick = {
+                    createOrder(navController, id, cantidad, id_iest, cliente)
+                },
                 colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
