@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -49,6 +50,9 @@ fun order_screen(navController: NavHostController, id: String) {
     val viewModel = OrderViewModel()
     viewModel.getOrderItem(id)
 
+    //Progress bar value
+    var progress = 0.0f
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -63,6 +67,7 @@ fun order_screen(navController: NavHostController, id: String) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     items(viewModel.order) { order ->
+
                         Box (
                             modifier = Modifier.fillMaxWidth()
                         ) {
@@ -104,15 +109,16 @@ fun order_screen(navController: NavHostController, id: String) {
                         Row (
                             modifier = Modifier
                                 .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
-                                .padding(10.dp)
-                                .width(320.dp)
+                                .padding(horizontal = 10.dp, vertical = 20.dp)
+                                .widthIn(max = 400.dp, min = 350.dp)
                                 .align(Alignment.CenterHorizontally)
                         ) {
                             Image(
-                                painter = painterResource(id = R.drawable.burger),
+                                painter = painterResource(id = R.drawable.food_icon),
                                 contentDescription = "Food",
                                 modifier = Modifier
                                     .weight(0.8f)
+                                    .size(100.dp)
                                     .clip(shape = RoundedCornerShape(20.dp))
                             )
 
@@ -239,7 +245,7 @@ fun order_screen(navController: NavHostController, id: String) {
                             )
                         }
 
-                        Spacer(modifier = Modifier.weight(1f))
+                        Spacer(modifier = Modifier.height(30.dp))
 
                         Column (
                             modifier = Modifier.padding(horizontal = 30.dp)
@@ -253,8 +259,17 @@ fun order_screen(navController: NavHostController, id: String) {
 
                             Spacer(modifier = Modifier.height(10.dp))
 
+                            //Set progress
+                            if (order.estado == "En preparación") {
+                                progress = 0.33f
+                            } else if (order.estado == "Listo para recoger") {
+                                progress = 0.66f
+                            } else {
+                                progress = 1f
+                            }
+
                             LinearProgressIndicator(
-                                progress = 0.33f,
+                                progress = progress,
                                 color = Color(0xFFB63B14),
                                 modifier = Modifier
                                     .height(35.dp)
