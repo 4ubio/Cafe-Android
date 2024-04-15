@@ -1,6 +1,5 @@
 package com.example.cafe.views
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -28,17 +28,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
 import com.example.cafe.R
 import com.example.cafe.components.Navbar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun cart_screen(navController: NavHostController) {
+fun cart_screen(
+    navController: NavHostController,
+    id: String,
+    nombre: String,
+    foto: String,
+    precio: String,
+    cantidad: String
+) {
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -75,12 +82,15 @@ fun cart_screen(navController: NavHostController) {
                 modifier = Modifier
                     .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
                     .padding(10.dp)
-                    .width(320.dp)
+                    .widthIn(max = 400.dp, min = 350.dp)
                     .align(Alignment.CenterHorizontally)
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.burger),
-                    contentDescription = "Food",
+
+                AsyncImage(
+                    model = "https://lacafe3.000webhostapp.com/food/$foto",
+                    placeholder = painterResource(id = R.drawable.food_icon),
+                    error = painterResource(id = R.drawable.food_icon),
+                    contentDescription = nombre,
                     modifier = Modifier
                         .weight(0.8f)
                         .clip(shape = RoundedCornerShape(20.dp))
@@ -94,7 +104,7 @@ fun cart_screen(navController: NavHostController) {
                         .align(Alignment.CenterVertically)
                 ) {
                     Text (
-                        text = "Hamburguesa",
+                        text = nombre,
                         fontSize = 22.sp,
                         fontWeight = FontWeight.Bold,
                     )
@@ -102,7 +112,7 @@ fun cart_screen(navController: NavHostController) {
                     Spacer(modifier = Modifier.height(5.dp))
 
                     Text(
-                        text = "$70 mxn",
+                        text = "$$precio mxn",
                         fontSize = 18.sp,
                         fontStyle = FontStyle.Italic
                     )
@@ -110,7 +120,7 @@ fun cart_screen(navController: NavHostController) {
                     Spacer(modifier = Modifier.height(5.dp))
 
                     Text(
-                        text = "Cantidad: 1",
+                        text = "Cantidad: $cantidad",
                         fontSize = 18.sp,
                         fontStyle = FontStyle.Italic
                     )
@@ -133,7 +143,7 @@ fun cart_screen(navController: NavHostController) {
                 )
 
                 Text(
-                    text = "$70 mxn",
+                    text = "$${precio.toDouble() * cantidad.toInt()} mxn",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Light
                 )
@@ -159,7 +169,7 @@ fun cart_screen(navController: NavHostController) {
                 )
 
                 Text(
-                    text = "$70 mxn",
+                    text = "$${precio.toDouble() * cantidad.toInt()} mxn",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
@@ -190,8 +200,8 @@ fun cart_screen(navController: NavHostController) {
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun Preview_Cart() {
-    cart_screen(navController = rememberNavController())
+    //cart_screen(navController = rememberNavController())
 }

@@ -45,6 +45,8 @@ fun item_screen(navController: NavHostController, id: String) {
     val viewModel = FoodViewModel()
     viewModel.getFoodItem(id)
 
+    val cantidad = "2"
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -130,7 +132,13 @@ fun item_screen(navController: NavHostController, id: String) {
                             Spacer(modifier = Modifier.height(10.dp))
 
                             Button(
-                                onClick = {navController.navigate("CartScreen")},
+                                onClick = {navController.navigate("CartScreen/" +
+                                                                            "${food.id}/" +
+                                                                            "${food.nombre}/" +
+                                                                            "${food.foto}/" +
+                                                                            "${food.precio}/" +
+                                                                            "${cantidad}/"
+                                )},
                                 colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
                                 modifier = Modifier
                                     .align(Alignment.CenterHorizontally)

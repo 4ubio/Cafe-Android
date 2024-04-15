@@ -76,8 +76,27 @@ fun NavManager() {
             order_screen(navController, id)
         }
 
-        composable(route = "CartScreen") {
-            cart_screen(navController)
+        composable(route = "CartScreen/" +
+                        "{id}/" +
+                        "{nombre}/" +
+                        "{foto}/" +
+                        "{precio}/" +
+                        "{cantidad}/", arguments =
+            listOf(
+                navArgument("id") {type = NavType.StringType},
+                navArgument("nombre") {type = NavType.StringType},
+                navArgument("foto") {type = NavType.StringType},
+                navArgument("precio") {type = NavType.StringType},
+                navArgument("cantidad") {type = NavType.StringType}
+        )) {
+                parameters ->
+                    val id = parameters.arguments?.getString("id") ?: ""
+                    val nombre = parameters.arguments?.getString("nombre") ?: ""
+                    val foto = parameters.arguments?.getString("foto") ?: ""
+                    val precio = parameters.arguments?.getString("precio") ?: ""
+                    val cantidad = parameters.arguments?.getString("cantidad") ?: ""
+
+            cart_screen(navController, id, nombre, foto, precio, cantidad)
         }
 
         composable(route = "ProfileScreen") {

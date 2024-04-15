@@ -46,14 +46,14 @@ fun Navbar(navController: NavHostController) {
                 .clickable {navController.navigate("OrdersScreen")}
         )
 
-        Icon(
-            painter = painterResource(id = R.drawable.cart),
-            contentDescription = "Cart",
-            tint = Color(0xFFFFFFFF),
-            modifier = Modifier
-                .size(40.dp)
-                .clickable {navController.navigate("CartScreen")}
-        )
+        //Icon(
+            //painter = painterResource(id = R.drawable.cart),
+            //contentDescription = "Cart",
+            //tint = Color(0xFFFFFFFF),
+            //modifier = Modifier
+                //.size(40.dp)
+                //.clickable {navController.navigate("CartScreen")}
+        //)
 
         Icon(
             painter = painterResource(id = R.drawable.person),
