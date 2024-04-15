@@ -41,65 +41,21 @@ fun NavManager() {
 
         composable(route = "MenuScreen/{area}", arguments =
             listOf(
-                navArgument("area") {type = NavType.StringType},
+                navArgument("area") {type = NavType.StringType}
             )) {
             parameters ->
                 val area = parameters.arguments?.getString("area") ?: ""
             menu_screen(navController, area)
         }
 
-        composable(route = "ItemScreen" +
-                            "/{id}" +
-                            "/{nombre}" +
-                            "/{foto}" +
-                            "/{precio}" +
-                            "/{descripcion}" +
-                            "/{estado}" +
-                            "/{tiempo}" +
-                            "/{categoria}" +
-                            "/{area}" +
-                            "/{hora_fin}" +
-                            "/{hora_inicio}",
-                    arguments = listOf(
-                            navArgument("id") {type = NavType.StringType},
-                            navArgument("nombre") {type = NavType.StringType},
-                            navArgument("foto") {type = NavType.StringType},
-                            navArgument("precio") {type = NavType.StringType},
-                            navArgument("descripcion") {type = NavType.StringType},
-                            navArgument("estado") {type = NavType.StringType},
-                            navArgument("tiempo") {type = NavType.StringType},
-                            navArgument("categoria") {type = NavType.StringType},
-                            navArgument("area") {type = NavType.StringType},
-                            navArgument("hora_fin") {type = NavType.StringType},
-                            navArgument("hora_inicio") {type = NavType.StringType},
+        composable(route = "ItemScreen/{id}", arguments =
+            listOf(
+                navArgument("id") {type = NavType.StringType}
         )) {
                 parameters ->
                     val id = parameters.arguments?.getString("id") ?: ""
-                    val nombre = parameters.arguments?.getString("nombre") ?: ""
-                    val foto = parameters.arguments?.getString("foto") ?: ""
-                    val precio = parameters.arguments?.getString("precio") ?: ""
-                    val descripcion = parameters.arguments?.getString("descripcion") ?: ""
-                    val estado = parameters.arguments?.getString("estado") ?: ""
-                    val tiempo = parameters.arguments?.getString("tiempo") ?: ""
-                    val categoria = parameters.arguments?.getString("categoria") ?: ""
-                    val area = parameters.arguments?.getString("area") ?: ""
-                    val hora_fin = parameters.arguments?.getString("hora_fin") ?: ""
-                    val hora_inicio = parameters.arguments?.getString("hora_inicio") ?: ""
 
-            item_screen(
-                navController,
-                id,
-                nombre,
-                foto,
-                precio,
-                descripcion,
-                estado,
-                tiempo,
-                categoria,
-                area,
-                hora_fin,
-                hora_inicio
-            )
+            item_screen(navController, id)
         }
 
         composable(route = "ConfScreen") {

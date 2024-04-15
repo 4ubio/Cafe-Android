@@ -15,9 +15,19 @@ interface APIService {
         @Query("area") area:String,
     ): List<Food>
 
+    @GET("food")
+    suspend fun getFood(
+        @Query("id") id:String,
+    ): List<Food>
+
     @GET("orders")
     suspend fun getOrders(
         @Query("id_iest") id_iest:String,
+    ): List<Order>
+
+    @GET("order")
+    suspend fun getOrder(
+        @Query("id") id:String,
     ): List<Order>
 
     companion object {

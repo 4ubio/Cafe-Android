@@ -78,7 +78,7 @@ fun menu_screen(navController: NavHostController, area: String) {
             Spacer(modifier = Modifier.height(5.dp))
 
             //Display Menu
-            if (viewModel.errorMessage.isEmpty()) {
+            if (viewModel.errorMessage_menu.isEmpty()) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -132,20 +132,7 @@ fun menu_screen(navController: NavHostController, area: String) {
 
                                 Button(
                                     onClick = {
-                                        navController.navigate(
-                                            "ItemScreen" +
-                                                    "/${food.id}" +
-                                                    "/${food.nombre}" +
-                                                    "/${food.foto}" +
-                                                    "/${food.precio}" +
-                                                    "/${food.descripcion}" +
-                                                    "/${food.estado}" +
-                                                    "/${food.tiempo}" +
-                                                    "/${food.categoria}" +
-                                                    "/${food.area}" +
-                                                    "/${food.hora_fin}" +
-                                                    "/${food.hora_inicio}"
-                                        )
+                                        navController.navigate("ItemScreen/${food.id}")
                                     },
                                     colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
                                     modifier = Modifier.fillMaxWidth()
@@ -164,7 +151,7 @@ fun menu_screen(navController: NavHostController, area: String) {
                     }
                 }
             } else {
-                Text(viewModel.errorMessage)
+                Text(viewModel.errorMessage_menu)
             }
 
         Spacer(modifier = Modifier.weight(1f))

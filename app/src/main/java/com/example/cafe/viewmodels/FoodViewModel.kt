@@ -13,9 +13,12 @@ import kotlinx.coroutines.launch
 class FoodViewModel : ViewModel() {
 
     private val _menu = mutableStateListOf<Food>()
-    var errorMessage: String by mutableStateOf("")
-
+    var errorMessage_menu: String by mutableStateOf("")
     val menu: List<Food> get() = _menu
+
+    private val _food = mutableStateListOf<Food>()
+    var errorMessage_food: String by mutableStateOf("")
+    val food: List<Food> get() = _food
 
     fun getMenuList(area: String) {
         viewModelScope.launch {
@@ -25,7 +28,20 @@ class FoodViewModel : ViewModel() {
                 _menu.clear()
                 _menu.addAll(apiService.getMenu(area))
             } catch (e: Exception) {
-                errorMessage = e.message.toString()
+                errorMessage_menu = e.message.toString()
+            }
+        }
+    }
+
+    fun getFoodItem(id: String) {
+        viewModelScope.launch {
+            val route = "getFood.php/"
+            val apiService = APIService.getInstance(route)
+            try {
+                _food.clear()
+                _food.addAll(apiService.getFood(id))
+            } catch (e: Exception) {
+                errorMessage_food = e.message.toString()
             }
         }
     }
