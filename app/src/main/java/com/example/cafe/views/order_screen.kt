@@ -76,7 +76,7 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
             Column() {
 
                 //Display Food
-                if (!viewModel.order.isEmpty()) {
+                if (!viewModel.isLoading_order) {
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxHeight()

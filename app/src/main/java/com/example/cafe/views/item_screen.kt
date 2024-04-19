@@ -57,7 +57,7 @@ fun item_screen(navController: NavHostController, viewModel: FoodViewModel, id: 
         Column () {
 
             //Display Food
-            if (!viewModel.food.isEmpty()) {
+            if (!viewModel.isLoading_food) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxHeight()

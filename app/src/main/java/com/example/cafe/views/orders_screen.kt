@@ -65,7 +65,7 @@ fun orders_screen(navController: NavHostController, viewModel: OrderViewModel) {
             )
 
             //Display Orders
-            if (!viewModel.orders.isEmpty()) {
+            if (!viewModel.isLoading_orders) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxHeight()

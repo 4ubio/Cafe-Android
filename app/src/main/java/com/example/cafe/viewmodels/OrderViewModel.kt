@@ -15,10 +15,12 @@ class OrderViewModel : ViewModel() {
 
     private val _orders = mutableStateListOf<Order>()
     var errorMessage_orders: String by mutableStateOf("")
+    var isLoading_orders: Boolean by mutableStateOf(true)
     val orders: List<Order> get() = _orders
 
     private val _order = mutableStateListOf<Order>()
     var errorMessage_order: String by mutableStateOf("")
+    var isLoading_order: Boolean by mutableStateOf(true)
     val order: List<Order> get() = _order
 
     private val _orderResponse = mutableStateListOf<OrderResponse>()
@@ -32,6 +34,7 @@ class OrderViewModel : ViewModel() {
             try {
                 _orders.clear()
                 _orders.addAll(apiService.getOrders(id_iest))
+                isLoading_orders = false
             } catch (e: Exception) {
                 errorMessage_orders = e.message.toString()
             }
@@ -45,6 +48,7 @@ class OrderViewModel : ViewModel() {
             try {
                 _order.clear()
                 _order.addAll(apiService.getOrder(id))
+                isLoading_order = false
             } catch (e: Exception) {
                 errorMessage_order = e.message.toString()
             }

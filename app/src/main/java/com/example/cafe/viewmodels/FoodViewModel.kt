@@ -14,10 +14,12 @@ class FoodViewModel : ViewModel() {
 
     private val _menu = mutableStateListOf<Food>()
     var errorMessage_menu: String by mutableStateOf("")
+    var isLoading_menu: Boolean by mutableStateOf(true)
     val menu: List<Food> get() = _menu
 
     private val _food = mutableStateListOf<Food>()
     var errorMessage_food: String by mutableStateOf("")
+    var isLoading_food: Boolean by mutableStateOf(true)
     val food: List<Food> get() = _food
 
     fun getMenuList(area: String) {
@@ -27,6 +29,7 @@ class FoodViewModel : ViewModel() {
             try {
                 _menu.clear()
                 _menu.addAll(apiService.getMenu(area))
+                isLoading_menu = false
             } catch (e: Exception) {
                 errorMessage_menu = e.message.toString()
             }
@@ -40,6 +43,7 @@ class FoodViewModel : ViewModel() {
             try {
                 _food.clear()
                 _food.addAll(apiService.getFood(id))
+                isLoading_food = false
             } catch (e: Exception) {
                 errorMessage_food = e.message.toString()
             }
