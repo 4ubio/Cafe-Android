@@ -7,6 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.cafe.viewmodels.FoodViewModel
+import com.example.cafe.viewmodels.OrderViewModel
 import com.example.cafe.views.cart_screen
 import com.example.cafe.views.conf_screen
 import com.example.cafe.views.home_screen
@@ -22,6 +24,9 @@ import com.example.cafe.views.splash_screen
 @Composable
 fun NavManager() {
     var navController: NavHostController = rememberNavController()
+    var foodViewModel = FoodViewModel()
+    var orderViewModel = OrderViewModel()
+
     NavHost(navController = navController, startDestination = "SplashScreen") {
         composable(route = "SplashScreen") {
             splash_screen(navController)
@@ -45,7 +50,7 @@ fun NavManager() {
             )) {
             parameters ->
                 val area = parameters.arguments?.getString("area") ?: ""
-            menu_screen(navController, area)
+            menu_screen(navController, foodViewModel, area)
         }
 
         composable(route = "ItemScreen/{id}", arguments =
@@ -55,7 +60,7 @@ fun NavManager() {
                 parameters ->
                     val id = parameters.arguments?.getString("id") ?: ""
 
-            item_screen(navController, id)
+            item_screen(navController, foodViewModel, id)
         }
 
         composable(route = "ConfScreen") {
@@ -63,7 +68,7 @@ fun NavManager() {
         }
 
         composable(route = "OrdersScreen") {
-            orders_screen(navController)
+            orders_screen(navController, orderViewModel)
         }
 
         composable(route = "OrderScreen/{id}", arguments =
@@ -73,7 +78,7 @@ fun NavManager() {
                 parameters ->
                     val id = parameters.arguments?.getString("id") ?: ""
 
-            order_screen(navController, id)
+            order_screen(navController, orderViewModel, id)
         }
 
         composable(route = "CartScreen/" +

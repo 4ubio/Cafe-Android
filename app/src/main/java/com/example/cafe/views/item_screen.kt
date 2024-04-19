@@ -1,6 +1,7 @@
 package com.example.cafe.views
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,10 +20,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,11 +42,12 @@ import com.example.cafe.viewmodels.FoodViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun item_screen(navController: NavHostController, id: String) {
+fun item_screen(navController: NavHostController, viewModel: FoodViewModel, id: String) {
 
-    //Load Food
-    val viewModel = FoodViewModel()
-    viewModel.getFoodItem(id)
+    //Load Item
+    LaunchedEffect(viewModel.food, block = {
+        viewModel.getFoodItem(id)
+    })
 
     val cantidad = "1"
 
@@ -53,7 +57,7 @@ fun item_screen(navController: NavHostController, id: String) {
         Column () {
 
             //Display Food
-            if (viewModel.errorMessage_food.isEmpty()) {
+            if (!viewModel.food.isEmpty()) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -153,9 +157,19 @@ fun item_screen(navController: NavHostController, id: String) {
                                 )
                             }
                         }
-
-
                     }
+                }
+            } else {
+                Column (
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.weight(30f).fillMaxWidth()
+                ) {
+                    CircularProgressIndicator(
+                        color = Color(0xFFB63B14),
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .size(100.dp)
+                    )
                 }
             }
 

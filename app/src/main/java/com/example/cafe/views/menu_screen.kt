@@ -1,6 +1,7 @@
 package com.example.cafe.views
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,10 +18,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,7 +34,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.cafe.R
 import com.example.cafe.components.Navbar
@@ -39,11 +41,12 @@ import com.example.cafe.viewmodels.FoodViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun menu_screen(navController: NavHostController, area: String) {
+fun menu_screen(navController: NavHostController, viewModel: FoodViewModel, area: String) {
 
     //Load Menu
-    val viewModel = FoodViewModel()
-    viewModel.getMenuList(area)
+    LaunchedEffect(viewModel.menu, block = {
+        viewModel.getMenuList(area)
+    })
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -78,7 +81,7 @@ fun menu_screen(navController: NavHostController, area: String) {
             Spacer(modifier = Modifier.height(5.dp))
 
             //Display Menu
-            if (viewModel.errorMessage_menu.isEmpty()) {
+            if (!viewModel.menu.isEmpty()) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -151,12 +154,22 @@ fun menu_screen(navController: NavHostController, area: String) {
                     }
                 }
             } else {
-                Text(viewModel.errorMessage_menu)
+                Column (
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.weight(30f).fillMaxWidth()
+                ) {
+                    CircularProgressIndicator(
+                        color = Color(0xFFB63B14),
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .size(100.dp)
+                    )
+                }
             }
 
-        Spacer(modifier = Modifier.weight(1f))
-        Row (modifier = Modifier.padding(horizontal = 25.dp)) { Navbar(navController) }
-        Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.weight(1f))
+            Row (modifier = Modifier.padding(horizontal = 25.dp)) { Navbar(navController) }
+            Spacer(modifier = Modifier.height(15.dp))
         }
     }
 }
@@ -164,5 +177,5 @@ fun menu_screen(navController: NavHostController, area: String) {
 //@Preview(showBackground = true)
 @Composable
 fun Preview_Menu() {
-    menu_screen(navController = rememberNavController(), area = "Café")
+    //menu_screen(navController = rememberNavController(), area = "Café")
 }

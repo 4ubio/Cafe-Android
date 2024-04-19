@@ -20,12 +20,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,18 +39,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.cafe.R
 import com.example.cafe.components.Navbar
 import com.example.cafe.viewmodels.OrderViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun order_screen(navController: NavHostController, id: String) {
+fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id: String) {
 
     //Load Order
-    val viewModel = OrderViewModel()
-    viewModel.getOrderItem(id)
+    LaunchedEffect(viewModel.order, block = {
+        viewModel.getOrderItem(id)
+    })
 
     //Progress bar value
     var progress = 0.0f
@@ -59,7 +61,7 @@ fun order_screen(navController: NavHostController, id: String) {
         Column () {
 
             //Display Food
-            if (viewModel.errorMessage_order.isEmpty()) {
+            if (!viewModel.order.isEmpty()) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -280,6 +282,18 @@ fun order_screen(navController: NavHostController, id: String) {
                         }
                     }
                 }
+            } else {
+                Column (
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.weight(30f).fillMaxWidth()
+                ) {
+                    CircularProgressIndicator(
+                        color = Color(0xFFB63B14),
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .size(100.dp)
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -292,5 +306,5 @@ fun order_screen(navController: NavHostController, id: String) {
 //@Preview(showBackground = true)
 @Composable
 fun Preview_Order() {
-    order_screen(navController = rememberNavController(), id = "1")
+    //order_screen(navController = rememberNavController(), id = "1")
 }
