@@ -1,5 +1,6 @@
 package com.example.cafe.views
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,12 +17,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,23 +32,33 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.cafe.R
 import com.example.cafe.ui.theme.nexa
+import com.example.cafe.viewmodels.UserViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun login_screen(navController: NavHostController) {
-    var mail by remember { mutableStateOf("") }
+fun login_screen(navController: NavHostController, viewModel: UserViewModel) {
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val context = LocalContext.current
+
+    //Listen for isAuthing changes
+    LaunchedEffect(viewModel.isAuthing, block = {
+        if (viewModel.isAuthed) {                           //If user is authed, change screen
+            navController.navigate("HomeScreen")
+        } else if (viewModel.isAuthFailed) {                //Else, show message
+            Toast.makeText(context, "Correo o contraseña incorrectos.", Toast.LENGTH_LONG).show()
+        }
+    })
 
     Box(
         modifier = Modifier
@@ -81,8 +94,8 @@ fun login_screen(navController: NavHostController) {
                     .width(320.dp)
             ) {
                 OutlinedTextField(
-                    value = mail,
-                    onValueChange = { mail = it },
+                    value = email,
+                    onValueChange = { email = it },
                     label = { Text("Correo Institucional") },
                     leadingIcon = {
                         Icon(
@@ -92,7 +105,9 @@ fun login_screen(navController: NavHostController) {
                         )},
                     colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = Color(0xFFB63B14), unfocusedBorderColor = Color(0xFFB63B14)),
                     shape = RoundedCornerShape(30.dp),
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 3.dp)
                 )
 
                 Spacer(modifier = Modifier.height(2.dp))
@@ -111,47 +126,62 @@ fun login_screen(navController: NavHostController) {
                     shape = RoundedCornerShape(30.dp),
                     visualTransformation = PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 3.dp)
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                Button(
-                    onClick = {
-                        navController.navigate("HomeScreen")
-                    },
-                    colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .fillMaxWidth()
-                        .padding(horizontal = 30.dp)
-                ) {
-                    Text(
-                        text = "Iniciar Sesión",
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFFFFFFFF),
-                        fontSize = 20.sp
-                    )
-                }
+                if (!viewModel.isAuthing) {
+                    Button(
+                        onClick = {
+                            if (email != "" && password != "") {
+                                viewModel.authCafeUser(email, password)
+                            } else {
+                                Toast.makeText(context, "Faltan campos por llenar.", Toast.LENGTH_LONG).show()
+                            }
+                        },
+                        colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .fillMaxWidth()
+                            .padding(horizontal = 30.dp)
+                    ) {
+                        Text(
+                            text = "Iniciar Sesión",
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFFFFFFFF),
+                            fontSize = 20.sp
+                        )
+                    }
 
-                Spacer(modifier = Modifier.height(5.dp))
+                    Spacer(modifier = Modifier.height(5.dp))
 
-                Button(
-                    onClick = {
-                        navController.navigate("RegisterScreen")
-                    },
-                    colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .fillMaxWidth()
-                        .padding(horizontal = 30.dp)
-                ) {
-                    Text(
-                        text = "O registrate ya",
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF000000),
-                        fontSize = 20.sp
+                    Button(
+                        onClick = {
+                            navController.navigate("RegisterScreen")
+                        },
+                        colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .fillMaxWidth()
+                            .padding(horizontal = 30.dp)
+                    ) {
+                        Text(
+                            text = "O registrate ya",
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF000000),
+                            fontSize = 20.sp
+                        )
+                    }
+                } else {
+                    Spacer(modifier = Modifier.height(5.dp))
+                    CircularProgressIndicator(
+                        color = Color(0xFFB63B14),
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
+                    Spacer(modifier = Modifier.height(5.dp))
                 }
 
                 Spacer(modifier = Modifier.height(5.dp))
@@ -162,8 +192,8 @@ fun login_screen(navController: NavHostController) {
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun Preview_Login() {
-    login_screen(navController = rememberNavController())
+    //login_screen(navController = rememberNavController())
 }

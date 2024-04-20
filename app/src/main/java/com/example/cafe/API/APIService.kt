@@ -3,6 +3,7 @@ package com.example.cafe.API
 import com.example.cafe.models.Food
 import com.example.cafe.models.Order
 import com.example.cafe.models.OrderResponse
+import com.example.cafe.models.User
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -11,6 +12,12 @@ import retrofit2.http.Query
 const val BASE_URL = "https://lacafe3.000webhostapp.com/API/"
 
 interface APIService {
+    @GET("user")
+    suspend fun authUser(
+        @Query("email") email:String,
+        @Query("password") password:String
+    ): User
+
     @GET("menu")
     suspend fun getMenu(
         @Query("area") area:String,

@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.cafe.viewmodels.FoodViewModel
 import com.example.cafe.viewmodels.OrderViewModel
+import com.example.cafe.viewmodels.UserViewModel
 import com.example.cafe.views.cart_screen
 import com.example.cafe.views.conf_screen
 import com.example.cafe.views.home_screen
@@ -26,6 +27,7 @@ fun NavManager() {
     var navController: NavHostController = rememberNavController()
     var foodViewModel = FoodViewModel()
     var orderViewModel = OrderViewModel()
+    var userViewModel = UserViewModel()
 
     NavHost(navController = navController, startDestination = "SplashScreen") {
         composable(route = "SplashScreen") {
@@ -33,7 +35,7 @@ fun NavManager() {
         }
 
         composable(route = "LoginScreen") {
-            login_screen(navController)
+            login_screen(navController, userViewModel)
         }
 
         composable(route = "RegisterScreen") {
