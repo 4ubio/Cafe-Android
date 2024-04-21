@@ -1,6 +1,5 @@
 package com.example.cafe.views
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -20,30 +19,28 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.cafe.R
 import com.example.cafe.components.Navbar
 import com.example.cafe.viewmodels.UserViewModel
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun profile_screen(navController: NavHostController) {
-    val context: Context = LocalContext.current
-    val userViewModel = UserViewModel(context)
+fun profile_screen(navController: NavHostController, viewModel: UserViewModel) {
+    val corrutineScope = rememberCoroutineScope()
 
-    var savedIdIEST = userViewModel.id_iest.collectAsState(initial = "")
-    var savedName = userViewModel.name.collectAsState(initial = "")
-    var savedEmail = userViewModel.email.collectAsState(initial = "")
+    var savedIdIEST = viewModel.id_iest.collectAsState(initial = "")
+    var savedName = viewModel.name.collectAsState(initial = "")
+    var savedEmail = viewModel.email.collectAsState(initial = "")
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -257,7 +254,12 @@ fun profile_screen(navController: NavHostController) {
                     .padding(15.dp)
                     .width(320.dp)
                     .align(Alignment.CenterHorizontally)
-                    .clickable {}
+                    .clickable {
+                        corrutineScope.launch {
+                            viewModel.setData(false, "", "", "", "")
+                            navController.navigate("LoginScreen")
+                        }
+                    }
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.logout),
@@ -283,8 +285,8 @@ fun profile_screen(navController: NavHostController) {
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun Preview_Profile() {
-    profile_screen(navController = rememberNavController())
+    //profile_screen(navController = rememberNavController())
 }

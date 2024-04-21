@@ -1,6 +1,5 @@
 package com.example.cafe.views
 
-import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -12,21 +11,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.cafe.R
 import com.example.cafe.viewmodels.UserViewModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun splash_screen(navController: NavHostController) {
-    val context: Context = LocalContext.current
-    val userViewModel = UserViewModel(context)
-    var savedIsLogged = userViewModel.is_logged.collectAsState(initial = false)
+fun splash_screen(navController: NavHostController, viewModel: UserViewModel) {
+
+    var savedIsLogged = viewModel.is_logged.collectAsState(initial = false)
 
     LaunchedEffect(key1 = true) {
         delay(5000)
@@ -59,8 +54,8 @@ fun splash() {
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun Preview_Splash() {
-    splash_screen(navController = rememberNavController())
+    //splash_screen(navController = rememberNavController())
 }

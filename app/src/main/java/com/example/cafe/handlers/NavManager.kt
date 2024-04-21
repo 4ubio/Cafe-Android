@@ -35,7 +35,7 @@ fun NavManager() {
 
     NavHost(navController = navController, startDestination = "SplashScreen") {
         composable(route = "SplashScreen") {
-            splash_screen(navController)
+            splash_screen(navController, userViewModel)
         }
 
         composable(route = "LoginScreen") {
@@ -111,7 +111,7 @@ fun NavManager() {
         }
 
         composable(route = "ProfileScreen") {
-            profile_screen(navController)
+            profile_screen(navController, userViewModel)
         }
     }
 }
