@@ -1,6 +1,8 @@
 package com.example.cafe.handlers
 
+import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -24,10 +26,12 @@ import com.example.cafe.views.splash_screen
 
 @Composable
 fun NavManager() {
-    var navController: NavHostController = rememberNavController()
-    var foodViewModel = FoodViewModel()
-    var orderViewModel = OrderViewModel()
-    var userViewModel = UserViewModel()
+    val navController: NavHostController = rememberNavController()
+    val context: Context = LocalContext.current
+
+    val foodViewModel = FoodViewModel()
+    val orderViewModel = OrderViewModel()
+    val userViewModel = UserViewModel(context)
 
     NavHost(navController = navController, startDestination = "SplashScreen") {
         composable(route = "SplashScreen") {

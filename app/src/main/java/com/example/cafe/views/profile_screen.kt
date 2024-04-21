@@ -1,5 +1,6 @@
 package com.example.cafe.views
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -18,9 +19,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,10 +33,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.cafe.R
 import com.example.cafe.components.Navbar
+import com.example.cafe.viewmodels.UserViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun profile_screen(navController: NavHostController) {
+    val context: Context = LocalContext.current
+    val userViewModel = UserViewModel(context)
+
+    var savedIdIEST = userViewModel.id_iest.collectAsState(initial = "")
+    var savedName = userViewModel.name.collectAsState(initial = "")
+    var savedEmail = userViewModel.email.collectAsState(initial = "")
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -52,8 +63,30 @@ fun profile_screen(navController: NavHostController) {
             )
 
             Text(
-                text = "Sebastián Rubio Quiroz",
+                text = "${savedName.value}",
                 fontSize = 30.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .padding(horizontal = 15.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(
+                text = "Email: ${savedEmail.value}",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .padding(horizontal = 15.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Text(
+                text = "ID IEST: ${savedIdIEST.value}",
+                fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .padding(horizontal = 15.dp)

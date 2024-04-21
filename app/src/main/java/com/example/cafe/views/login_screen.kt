@@ -28,6 +28,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,18 +44,31 @@ import androidx.navigation.NavHostController
 import com.example.cafe.R
 import com.example.cafe.ui.theme.nexa
 import com.example.cafe.viewmodels.UserViewModel
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun login_screen(navController: NavHostController, viewModel: UserViewModel) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+
     val context = LocalContext.current
+    val corrutineScope = rememberCoroutineScope()
 
     //Listen for isAuthing changes
     LaunchedEffect(viewModel.isAuthing, block = {
-        if (viewModel.isAuthed) {                           //If user is authed, change screen
-            navController.navigate("HomeScreen")
+        if (viewModel.isAuthed) {                           //If user is authed,
+            corrutineScope.launch {        //Save their login data
+                viewModel.setData(
+                    true,
+                    viewModel.user.id_iest,
+                    viewModel.user.nombre,
+                    viewModel.user.email,
+                    viewModel.user.estado
+                )
+            }
+            navController.navigate("HomeScreen")    //And change screen
+
         } else if (viewModel.isAuthFailed) {                //Else, show message
             Toast.makeText(context, "Correo o contraseña incorrectos.", Toast.LENGTH_LONG).show()
         }
