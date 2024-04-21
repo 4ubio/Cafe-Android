@@ -24,6 +24,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,15 +38,16 @@ import androidx.navigation.NavHostController
 import com.example.cafe.R
 import com.example.cafe.components.Navbar
 import com.example.cafe.viewmodels.OrderViewModel
+import com.example.cafe.viewmodels.UserViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun orders_screen(navController: NavHostController, viewModel: OrderViewModel) {
+fun orders_screen(navController: NavHostController, orderViewModel: OrderViewModel, userViewModel: UserViewModel) {
 
     //Load Orders
-    val id_iest = "19666"
-    LaunchedEffect(viewModel.orders, block = {
-        viewModel.getOrdersList(id_iest)
+    val id_iest = userViewModel.id_iest.collectAsState(initial = "")
+    LaunchedEffect(orderViewModel.orders, block = {
+        orderViewModel.getOrdersList(id_iest.value)
     })
 
     Box(
@@ -65,14 +67,14 @@ fun orders_screen(navController: NavHostController, viewModel: OrderViewModel) {
             )
 
             //Display Orders
-            if (!viewModel.isLoading_orders) {
+            if (!orderViewModel.isLoading_orders) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxHeight()
                         .padding(15.dp)
                         .weight(30f)
                 ) {
-                    items(viewModel.orders) { order ->
+                    items(orderViewModel.orders) { order ->
 
                         Row (
                             modifier = Modifier

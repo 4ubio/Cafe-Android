@@ -74,7 +74,7 @@ fun NavManager() {
         }
 
         composable(route = "OrdersScreen") {
-            orders_screen(navController, orderViewModel)
+            orders_screen(navController, orderViewModel, userViewModel)
         }
 
         composable(route = "OrderScreen/{id}", arguments =
@@ -107,7 +107,7 @@ fun NavManager() {
                     val precio = parameters.arguments?.getString("precio") ?: ""
                     val cantidad = parameters.arguments?.getString("cantidad") ?: ""
 
-            cart_screen(navController, id, nombre, foto, precio, cantidad)
+            cart_screen(navController, orderViewModel, userViewModel, id, nombre, foto, precio, cantidad)
         }
 
         composable(route = "ProfileScreen") {

@@ -20,6 +20,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,15 +35,16 @@ import coil.compose.AsyncImage
 import com.example.cafe.R
 import com.example.cafe.components.Navbar
 import com.example.cafe.viewmodels.OrderViewModel
+import com.example.cafe.viewmodels.UserViewModel
 
 fun createOrder(
     navController: NavHostController,
+    viewModel: OrderViewModel,
     id_producto: String,
     cantidad: String,
     id_iest: String,
     cliente: String
 ) {
-    val viewModel = OrderViewModel()
     viewModel.setUserOrder(id_producto, cantidad, id_iest, cliente)
     navController.navigate("ConfScreen")
 }
@@ -50,6 +52,8 @@ fun createOrder(
 @Composable
 fun cart_screen(
     navController: NavHostController,
+    orderViewModel: OrderViewModel,
+    userViewModel: UserViewModel,
     id: String,
     nombre: String,
     foto: String,
@@ -57,8 +61,8 @@ fun cart_screen(
     cantidad: String
 ) {
 
-    val cliente = "Sebastián Rubio Quiroz"
-    val id_iest = "19666"
+    var name = userViewModel.name.collectAsState(initial = "")
+    var id_iest = userViewModel.id_iest.collectAsState(initial = "")
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -193,7 +197,7 @@ fun cart_screen(
 
             Button(
                 onClick = {
-                    createOrder(navController, id, cantidad, id_iest, cliente)
+                    createOrder(navController, orderViewModel, id, cantidad, id_iest.value, name.value)
                 },
                 colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
                 modifier = Modifier
