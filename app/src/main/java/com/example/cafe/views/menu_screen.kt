@@ -81,7 +81,7 @@ fun menu_screen(navController: NavHostController, viewModel: FoodViewModel, area
             Spacer(modifier = Modifier.height(5.dp))
 
             //Display Menu
-            if (!viewModel.isLoading_menu) {
+            if (viewModel.isLoaded_menu) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxHeight()

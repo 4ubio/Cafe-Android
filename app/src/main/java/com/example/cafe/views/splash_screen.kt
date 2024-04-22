@@ -24,7 +24,7 @@ fun splash_screen(navController: NavHostController, viewModel: UserViewModel) {
     var savedIsLogged = viewModel.is_logged.collectAsState(initial = false)
 
     LaunchedEffect(key1 = true) {
-        delay(5000)
+        delay(1000)
         navController.popBackStack()
 
         if (savedIsLogged.value) {

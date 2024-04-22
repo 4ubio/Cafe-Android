@@ -26,7 +26,7 @@ interface APIService {
     @GET("food")
     suspend fun getFood(
         @Query("id") id:String,
-    ): List<Food>
+    ): Food
 
     @GET("orders")
     suspend fun getOrders(
@@ -36,7 +36,7 @@ interface APIService {
     @GET("order")
     suspend fun getOrder(
         @Query("id") id:String,
-    ): List<Order>
+    ): Order
 
     @GET("order_response")
     suspend fun setOrder(
@@ -44,7 +44,7 @@ interface APIService {
         @Query("cantidad") cantidad:String,
         @Query("id_iest") id_iest:String,
         @Query("cliente") cliente:String,
-    ): List<OrderResponse>
+    ): OrderResponse
 
     companion object {
         var apiService: APIService? = null

@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,9 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -76,238 +75,230 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
             Column() {
 
                 //Display Food
-                if (!viewModel.isLoading_order) {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .weight(30f),
-                        horizontalAlignment = Alignment.CenterHorizontally
+                if (viewModel.isLoaded_order) {
+                    Box(
+                        modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState())
                     ) {
-                        items(viewModel.order) { order ->
+                        Button(
+                            onClick = { navController.popBackStack() },
+                            colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
+                            modifier = Modifier
+                                .padding(15.dp)
+                                .width(70.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.arrow_back),
+                                contentDescription = "Back",
+                                tint = Color(0xFF471608),
+                                modifier = Modifier.size(30.dp)
+                            )
+                        }
 
-                            Box(
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Button(
-                                    onClick = { navController.popBackStack() },
-                                    colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
-                                    modifier = Modifier
-                                        .padding(15.dp)
-                                        .width(70.dp)
-                                ) {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.arrow_back),
-                                        contentDescription = "Back",
-                                        tint = Color(0xFF471608),
-                                        modifier = Modifier.size(30.dp)
-                                    )
-                                }
+                        Text(
+                            text = "Tu pedido",
+                            fontSize = 30.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.align(Alignment.Center)
+                        )
+                    }
 
-                                Text(
-                                    text = "Tu pedido",
-                                    fontSize = 30.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    modifier = Modifier.align(Alignment.Center)
-                                )
-                            }
+                    Spacer(modifier = Modifier.height(5.dp))
+
+                    Text(
+                        text = "No. ${viewModel.order.id}",
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(horizontal = 30.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(15.dp))
+
+                    Row(
+                        modifier = Modifier
+                            .background(
+                                Color(0xFFD2CECE),
+                                shape = RoundedCornerShape(20.dp)
+                            )
+                            .padding(horizontal = 10.dp, vertical = 20.dp)
+                            .widthIn(max = 400.dp, min = 350.dp)
+                            .align(Alignment.CenterHorizontally)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.food_icon),
+                            contentDescription = "Food",
+                            modifier = Modifier
+                                .weight(0.8f)
+                                .size(100.dp)
+                                .clip(shape = RoundedCornerShape(20.dp))
+                        )
+
+                        Spacer(modifier = Modifier.width(20.dp))
+
+                        Column(
+                            modifier = Modifier
+                                .weight(1f)
+                                .align(Alignment.CenterVertically)
+                        ) {
+                            Text(
+                                text = viewModel.order.nombre_platillo,
+                                fontSize = 22.sp,
+                                fontWeight = FontWeight.Bold,
+                            )
 
                             Spacer(modifier = Modifier.height(5.dp))
 
                             Text(
-                                text = "No. ${order.id}",
-                                fontSize = 25.sp,
-                                fontWeight = FontWeight.Bold,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier.padding(horizontal = 30.dp)
+                                text = "$${viewModel.order.total} mxn",
+                                fontSize = 18.sp,
+                                fontStyle = FontStyle.Italic
                             )
-
-                            Spacer(modifier = Modifier.height(15.dp))
-
-                            Row(
-                                modifier = Modifier
-                                    .background(
-                                        Color(0xFFD2CECE),
-                                        shape = RoundedCornerShape(20.dp)
-                                    )
-                                    .padding(horizontal = 10.dp, vertical = 20.dp)
-                                    .widthIn(max = 400.dp, min = 350.dp)
-                                    .align(Alignment.CenterHorizontally)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.food_icon),
-                                    contentDescription = "Food",
-                                    modifier = Modifier
-                                        .weight(0.8f)
-                                        .size(100.dp)
-                                        .clip(shape = RoundedCornerShape(20.dp))
-                                )
-
-                                Spacer(modifier = Modifier.width(20.dp))
-
-                                Column(
-                                    modifier = Modifier
-                                        .weight(1f)
-                                        .align(Alignment.CenterVertically)
-                                ) {
-                                    Text(
-                                        text = order.nombre_platillo,
-                                        fontSize = 22.sp,
-                                        fontWeight = FontWeight.Bold,
-                                    )
-
-                                    Spacer(modifier = Modifier.height(5.dp))
-
-                                    Text(
-                                        text = "$${order.total} mxn",
-                                        fontSize = 18.sp,
-                                        fontStyle = FontStyle.Italic
-                                    )
-
-                                    Spacer(modifier = Modifier.height(5.dp))
-
-                                    Text(
-                                        text = "Cantidad: ${order.cantidad}",
-                                        fontSize = 18.sp,
-                                        fontStyle = FontStyle.Italic
-                                    )
-                                }
-                            }
-
-                            Spacer(modifier = Modifier.height(20.dp))
-
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 30.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Text(
-                                    text = "Recoger en:",
-                                    fontSize = 20.sp,
-                                    fontStyle = FontStyle.Italic,
-                                    fontWeight = FontWeight.Light
-                                )
-
-                                Text(
-                                    text = order.area,
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Light
-                                )
-                            }
 
                             Spacer(modifier = Modifier.height(5.dp))
 
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 30.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Text(
-                                    text = "Fecha de pedido:",
-                                    fontSize = 20.sp,
-                                    fontStyle = FontStyle.Italic,
-                                    fontWeight = FontWeight.Light
-                                )
-
-                                Text(
-                                    text = order.fecha,
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Light
-                                )
-                            }
-
-                            Spacer(modifier = Modifier.height(5.dp))
-
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 30.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Text(
-                                    text = "Hora de pedido:",
-                                    fontSize = 20.sp,
-                                    fontStyle = FontStyle.Italic,
-                                    fontWeight = FontWeight.Light
-                                )
-
-                                Text(
-                                    text = order.hora,
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Light
-                                )
-                            }
-
-                            Spacer(modifier = Modifier.height(15.dp))
-
-                            Divider(
-                                color = Color.Gray,
-                                thickness = 1.dp,
-                                modifier = Modifier.padding(horizontal = 30.dp)
+                            Text(
+                                text = "Cantidad: ${viewModel.order.cantidad}",
+                                fontSize = 18.sp,
+                                fontStyle = FontStyle.Italic
                             )
-
-                            Spacer(modifier = Modifier.height(15.dp))
-
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 30.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Text(
-                                    text = "Total",
-                                    fontSize = 20.sp,
-                                    fontStyle = FontStyle.Italic,
-                                    fontWeight = FontWeight.Bold
-                                )
-
-                                Text(
-                                    text = "$${order.total} mxn",
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                            }
-
-                            Spacer(modifier = Modifier.height(30.dp))
-
-                            Column(
-                                modifier = Modifier.padding(horizontal = 30.dp)
-                            ) {
-                                Text(
-                                    text = order.estado,
-                                    fontSize = 25.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    textAlign = TextAlign.Center,
-                                )
-
-                                Spacer(modifier = Modifier.height(10.dp))
-
-                                //Set progress
-                                if (order.estado == "En preparación") {
-                                    progress = 0.33f
-                                } else if (order.estado == "Listo para recoger") {
-                                    progress = 0.66f
-                                } else {
-                                    progress = 1f
-                                }
-
-                                LinearProgressIndicator(
-                                    progress = progress,
-                                    color = Color(0xFFB63B14),
-                                    modifier = Modifier
-                                        .height(35.dp)
-                                        .clip(RoundedCornerShape(16.dp))
-                                        .background(Color(0xFFC7D0D8))
-                                        .fillMaxWidth()
-                                )
-                            }
                         }
+                    }
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 30.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Recoger en:",
+                            fontSize = 20.sp,
+                            fontStyle = FontStyle.Italic,
+                            fontWeight = FontWeight.Light
+                        )
+
+                        Text(
+                            text = viewModel.order.area,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Light
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(5.dp))
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 30.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Fecha de pedido:",
+                            fontSize = 20.sp,
+                            fontStyle = FontStyle.Italic,
+                            fontWeight = FontWeight.Light
+                        )
+
+                        Text(
+                            text = viewModel.order.fecha,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Light
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(5.dp))
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 30.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Hora de pedido:",
+                            fontSize = 20.sp,
+                            fontStyle = FontStyle.Italic,
+                            fontWeight = FontWeight.Light
+                        )
+
+                        Text(
+                            text = viewModel.order.hora,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Light
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(15.dp))
+
+                    Divider(
+                        color = Color.Gray,
+                        thickness = 1.dp,
+                        modifier = Modifier.padding(horizontal = 30.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(15.dp))
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 30.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Total",
+                            fontSize = 20.sp,
+                            fontStyle = FontStyle.Italic,
+                            fontWeight = FontWeight.Bold
+                        )
+
+                        Text(
+                            text = "$${viewModel.order.total} mxn",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(30.dp))
+
+                    Column(
+                        modifier = Modifier.padding(horizontal = 30.dp)
+                    ) {
+                        Text(
+                            text = viewModel.order.estado,
+                            fontSize = 25.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center,
+                        )
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        //Set progress
+                        if (viewModel.order.estado == "En preparación") {
+                            progress = 0.33f
+                        } else if (viewModel.order.estado == "Listo para recoger") {
+                            progress = 0.66f
+                        } else {
+                            progress = 1f
+                        }
+
+                        LinearProgressIndicator(
+                            progress = progress,
+                            color = Color(0xFFB63B14),
+                            modifier = Modifier
+                                .height(35.dp)
+                                .clip(RoundedCornerShape(16.dp))
+                                .background(Color(0xFFC7D0D8))
+                                .fillMaxWidth()
+                        )
                     }
                 } else {
                     Column(
                         verticalArrangement = Arrangement.Center,
-                        modifier = Modifier.weight(30f).fillMaxWidth()
+                        modifier = Modifier
+                            .weight(30f)
+                            .fillMaxWidth()
                     ) {
                         CircularProgressIndicator(
                             color = Color(0xFFB63B14),

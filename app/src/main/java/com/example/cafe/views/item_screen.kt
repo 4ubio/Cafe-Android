@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,8 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -45,7 +42,7 @@ import com.example.cafe.viewmodels.FoodViewModel
 fun item_screen(navController: NavHostController, viewModel: FoodViewModel, id: String) {
 
     //Load Item
-    LaunchedEffect(viewModel.food, block = {
+    LaunchedEffect(Unit, block = {
         viewModel.getFoodItem(id)
     })
 
@@ -57,106 +54,97 @@ fun item_screen(navController: NavHostController, viewModel: FoodViewModel, id: 
         Column () {
 
             //Display Food
-            if (!viewModel.isLoading_food) {
-                LazyColumn(
+            if (viewModel.isLoaded_food) {
+                Box () {
+                    AsyncImage(
+                        model = "https://lacafe3.000webhostapp.com/food/${viewModel.food.foto}",
+                        placeholder = painterResource(id = R.drawable.food_icon),
+                        error = painterResource(id = R.drawable.food_icon),
+                        contentDescription = viewModel.food.nombre,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.fillMaxWidth().aspectRatio(16f / 9f)
+                    )
+
+                    Button(
+                        onClick = { navController.popBackStack() },
+                        colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
+                        modifier = Modifier.padding(15.dp).width(70.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.arrow_back),
+                            contentDescription = "Back",
+                            tint = Color(0xFF471608),
+                            modifier = Modifier.size(30.dp)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(15.dp))
+
+                Column (
                     modifier = Modifier
-                        .fillMaxHeight()
-                        .weight(30f),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
+                        .padding(10.dp)
+                        .widthIn(min = 300.dp, max = 380.dp)
+                        .align(Alignment.CenterHorizontally)
                 ) {
-                    items(viewModel.food) { food ->
-                        Box () {
-                            AsyncImage(
-                                model = "https://lacafe3.000webhostapp.com/food/${food.foto}",
-                                placeholder = painterResource(id = R.drawable.food_icon),
-                                error = painterResource(id = R.drawable.food_icon),
-                                contentDescription = food.nombre,
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier.fillMaxWidth().aspectRatio(16f / 9f)
-                            )
+                    Text(
+                        text = viewModel.food.nombre,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 30.sp,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
 
-                            Button(
-                                onClick = { navController.popBackStack() },
-                                colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
-                                modifier = Modifier.padding(15.dp).width(70.dp)
-                            ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.arrow_back),
-                                    contentDescription = "Back",
-                                    tint = Color(0xFF471608),
-                                    modifier = Modifier.size(30.dp)
-                                )
-                            }
-                        }
+                    Spacer(modifier = Modifier.height(10.dp))
 
-                        Spacer(modifier = Modifier.height(15.dp))
+                    Text(
+                        text = viewModel.food.descripcion,
+                        fontSize = 20.sp,
+                    )
 
-                        Column (
-                            modifier = Modifier
-                                .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
-                                .padding(10.dp)
-                                .widthIn(min = 300.dp, max = 380.dp)
-                                .align(Alignment.CenterHorizontally)
-                        ) {
-                            Text(
-                                text = food.nombre,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 30.sp,
-                                modifier = Modifier.align(Alignment.CenterHorizontally)
-                            )
+                    Spacer(modifier = Modifier.height(10.dp))
 
-                            Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        text = "Tiempo de preparación: ${viewModel.food.tiempo} minutos",
+                        fontSize = 20.sp,
+                    )
 
-                            Text(
-                                text = food.descripcion,
-                                fontSize = 20.sp,
-                            )
+                    Spacer(modifier = Modifier.height(10.dp))
 
-                            Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        text = "Estado: ${viewModel.food.estado}",
+                        fontSize = 20.sp,
+                    )
 
-                            Text(
-                                text = "Tiempo de preparación: ${food.tiempo} minutos",
-                                fontSize = 20.sp,
-                            )
+                    Spacer(modifier = Modifier.height(10.dp))
 
-                            Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        text = "Cantidad:",
+                        fontSize = 20.sp,
+                    )
 
-                            Text(
-                                text = "Estado: ${food.estado}",
-                                fontSize = 20.sp,
-                            )
+                    Spacer(modifier = Modifier.height(10.dp))
 
-                            Spacer(modifier = Modifier.height(10.dp))
-
-                            Text(
-                                text = "Cantidad:",
-                                fontSize = 20.sp,
-                            )
-
-                            Spacer(modifier = Modifier.height(10.dp))
-
-                            Button(
-                                onClick = {navController.navigate("CartScreen/" +
-                                                                            "${food.id}/" +
-                                                                            "${food.nombre}/" +
-                                                                            "${food.foto}/" +
-                                                                            "${food.precio}/" +
-                                                                            "${cantidad}/"
-                                )},
-                                colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
-                                modifier = Modifier
-                                    .align(Alignment.CenterHorizontally)
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 20.dp)
-                            ) {
-                                Text(
-                                    text = "Seleccionar   $${food.precio} mxn",
-                                    fontWeight = FontWeight.Bold,
-                                    color = Color(0xFFFFFFFF),
-                                    fontSize = 20.sp
-                                )
-                            }
-                        }
+                    Button(
+                        onClick = {navController.navigate("CartScreen/" +
+                                                                    "${viewModel.food.id}/" +
+                                                                    "${viewModel.food.nombre}/" +
+                                                                    "${viewModel.food.foto}/" +
+                                                                    "${viewModel.food.precio}/" +
+                                                                    "${cantidad}/"
+                        )},
+                        colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp)
+                    ) {
+                        Text(
+                            text = "Seleccionar   $${viewModel.food.precio} mxn",
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFFFFFFFF),
+                            fontSize = 20.sp
+                        )
                     }
                 }
             } else {

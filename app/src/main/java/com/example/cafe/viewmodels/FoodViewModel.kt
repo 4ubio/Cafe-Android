@@ -14,22 +14,23 @@ class FoodViewModel : ViewModel() {
 
     private val _menu = mutableStateListOf<Food>()
     var errorMessage_menu: String by mutableStateOf("")
-    var isLoading_menu: Boolean by mutableStateOf(true)
+    var isLoaded_menu: Boolean by mutableStateOf(false)
     val menu: List<Food> get() = _menu
 
-    private val _food = mutableStateListOf<Food>()
+    private var _food = Food("", "", "", "", "", "", "", "", "", "", "")
     var errorMessage_food: String by mutableStateOf("")
-    var isLoading_food: Boolean by mutableStateOf(true)
-    val food: List<Food> get() = _food
+    var isLoaded_food: Boolean by mutableStateOf(false)
+    val food: Food get() = _food
 
     fun getMenuList(area: String) {
         viewModelScope.launch {
             val route = "getMenu.php/"
             val apiService = APIService.getInstance(route)
+            isLoaded_menu = false
             try {
                 _menu.clear()
                 _menu.addAll(apiService.getMenu(area))
-                isLoading_menu = false
+                isLoaded_menu = true
             } catch (e: Exception) {
                 errorMessage_menu = e.message.toString()
             }
@@ -40,10 +41,10 @@ class FoodViewModel : ViewModel() {
         viewModelScope.launch {
             val route = "getFood.php/"
             val apiService = APIService.getInstance(route)
+            isLoaded_food = false
             try {
-                _food.clear()
-                _food.addAll(apiService.getFood(id))
-                isLoading_food = false
+                _food = apiService.getFood(id)
+                isLoaded_food = true
             } catch (e: Exception) {
                 errorMessage_food = e.message.toString()
             }

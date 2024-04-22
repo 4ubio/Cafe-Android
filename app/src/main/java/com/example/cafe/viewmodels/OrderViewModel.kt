@@ -15,26 +15,27 @@ class OrderViewModel : ViewModel() {
 
     private val _orders = mutableStateListOf<Order>()
     var errorMessage_orders: String by mutableStateOf("")
-    var isLoading_orders: Boolean by mutableStateOf(true)
+    var isLoaded_orders: Boolean by mutableStateOf(false)
     val orders: List<Order> get() = _orders
 
-    private val _order = mutableStateListOf<Order>()
+    private var _order = Order("", "", "", "", "", "", "", "", "", "", "")
     var errorMessage_order: String by mutableStateOf("")
-    var isLoading_order: Boolean by mutableStateOf(true)
-    val order: List<Order> get() = _order
+    var isLoaded_order: Boolean by mutableStateOf(false)
+    val order: Order get() = _order
 
-    private val _orderResponse = mutableStateListOf<OrderResponse>()
+    private var _orderResponse = OrderResponse("")
     var errorMessage_order_response: String by mutableStateOf("")
-    val orderResponse: List<OrderResponse> get() = _orderResponse
+    val orderResponse: OrderResponse get() = _orderResponse
 
     fun getOrdersList(id_iest: String) {
         viewModelScope.launch {
             val route = "getOrders.php/"
             val apiService = APIService.getInstance(route)
+            isLoaded_orders = false
             try {
                 _orders.clear()
                 _orders.addAll(apiService.getOrders(id_iest))
-                isLoading_orders = false
+                isLoaded_orders = true
             } catch (e: Exception) {
                 errorMessage_orders = e.message.toString()
             }
@@ -45,10 +46,10 @@ class OrderViewModel : ViewModel() {
         viewModelScope.launch {
             val route = "getOrder.php/"
             val apiService = APIService.getInstance(route)
+            isLoaded_order = false
             try {
-                _order.clear()
-                _order.addAll(apiService.getOrder(id))
-                isLoading_order = false
+                _order = apiService.getOrder(id)
+                isLoaded_order = true
             } catch (e: Exception) {
                 errorMessage_order = e.message.toString()
             }
@@ -60,8 +61,7 @@ class OrderViewModel : ViewModel() {
             val route = "createOrder.php/"
             val apiService = APIService.getInstance(route)
             try {
-                _orderResponse.clear()
-                _orderResponse.addAll(apiService.setOrder(id_producto, cantidad, id_iest, cliente))
+                _orderResponse = apiService.setOrder(id_producto, cantidad, id_iest, cliente)
             } catch (e: Exception) {
                 errorMessage_order_response = e.message.toString()
             }
