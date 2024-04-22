@@ -18,6 +18,11 @@ interface APIService {
         @Query("password") password:String
     ): User
 
+    @GET("user")
+    suspend fun getUser(
+        @Query("id_iest") id_iest:String
+    ): User
+
     @GET("menu")
     suspend fun getMenu(
         @Query("area") area:String,

@@ -17,7 +17,7 @@ class FoodViewModel : ViewModel() {
     var isLoaded_menu: Boolean by mutableStateOf(false)
     val menu: List<Food> get() = _menu
 
-    private var _food = Food("", "", "", "", "", "", "", "", "", "", "")
+    private var _food = Food("", "", "", "", "", "", "", "", "", "00:00:00", "00:00:00")
     var errorMessage_food: String by mutableStateOf("")
     var isLoaded_food: Boolean by mutableStateOf(false)
     val food: Food get() = _food

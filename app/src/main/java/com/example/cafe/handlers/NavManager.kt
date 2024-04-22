@@ -66,7 +66,7 @@ fun NavManager() {
                 parameters ->
                     val id = parameters.arguments?.getString("id") ?: ""
 
-            item_screen(navController, foodViewModel, id)
+            item_screen(navController, foodViewModel, userViewModel, id)
         }
 
         composable(route = "ConfScreen") {

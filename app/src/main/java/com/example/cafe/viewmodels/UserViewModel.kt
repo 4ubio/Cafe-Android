@@ -51,6 +51,27 @@ class UserViewModel(val context: Context) : ViewModel() {
         }
     }
 
+    //Get user status
+    private var _userStatus: String by mutableStateOf("")
+    var errorMessage_status: String by mutableStateOf("")
+    var isStatusLoaded: Boolean by mutableStateOf(false)
+    val userStatus: String get() = _userStatus
+
+    fun getUserStatus(id_iest: String) {
+        viewModelScope.launch {
+            val route = "getUser.php/"
+            val apiService = APIService.getInstance(route)
+            isStatusLoaded = false
+            try {
+                _userStatus = apiService.getUser(id_iest).estado
+                isStatusLoaded = true
+            } catch (e: Exception) {
+                errorMessage_status = e.message.toString()
+                isStatusLoaded = false
+            }
+        }
+    }
+
     //Save Login Data
     companion object {
         val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "UserData")
