@@ -25,6 +25,8 @@ class OrderViewModel : ViewModel() {
 
     private var _orderResponse = OrderResponse("")
     var errorMessage_order_response: String by mutableStateOf("")
+    var isSetting_order: Boolean by mutableStateOf(false)
+    var isCreated_order: Boolean by mutableStateOf(false)
     val orderResponse: OrderResponse get() = _orderResponse
 
     fun getOrdersList(id_iest: String) {
@@ -60,10 +62,15 @@ class OrderViewModel : ViewModel() {
         viewModelScope.launch {
             val route = "createOrder.php/"
             val apiService = APIService.getInstance(route)
+            isSetting_order = true
+            isCreated_order = false
             try {
                 _orderResponse = apiService.setOrder(id_producto, cantidad, id_iest, cliente)
+                isSetting_order = false
+                isCreated_order = true
             } catch (e: Exception) {
                 errorMessage_order_response = e.message.toString()
+                isSetting_order = false
             }
         }
     }

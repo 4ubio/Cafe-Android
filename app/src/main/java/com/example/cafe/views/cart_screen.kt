@@ -16,10 +16,12 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,18 +39,6 @@ import com.example.cafe.components.Navbar
 import com.example.cafe.viewmodels.OrderViewModel
 import com.example.cafe.viewmodels.UserViewModel
 
-fun createOrder(
-    navController: NavHostController,
-    viewModel: OrderViewModel,
-    id_producto: String,
-    cantidad: String,
-    id_iest: String,
-    cliente: String
-) {
-    viewModel.setUserOrder(id_producto, cantidad, id_iest, cliente)
-    navController.navigate("ConfScreen")
-}
-
 @Composable
 fun cart_screen(
     navController: NavHostController,
@@ -63,6 +53,13 @@ fun cart_screen(
 
     var name = userViewModel.name.collectAsState(initial = "")
     var id_iest = userViewModel.id_iest.collectAsState(initial = "")
+
+    LaunchedEffect(orderViewModel.isCreated_order, block = {
+        if (orderViewModel.isCreated_order) {
+            navController.navigate("ConfScreen")
+            orderViewModel.isCreated_order = false
+        }
+    })
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -199,21 +196,28 @@ fun cart_screen(
 
             Spacer(modifier = Modifier.height(15.dp))
 
-            Button(
-                onClick = {
-                    createOrder(navController, orderViewModel, id, cantidad, id_iest.value, name.value)
-                },
-                colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .fillMaxWidth()
-                    .padding(horizontal = 30.dp)
-            ) {
-                Text(
-                    text = "Realizar pago",
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFFFFFFFF),
-                    fontSize = 20.sp
+            if (!orderViewModel.isSetting_order) {
+                Button(
+                    onClick = {
+                        orderViewModel.setUserOrder(id, cantidad, id_iest.value, name.value)
+                    },
+                    colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .fillMaxWidth()
+                        .padding(horizontal = 30.dp)
+                ) {
+                    Text(
+                        text = "Realizar pago",
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFFFFFFFF),
+                        fontSize = 20.sp
+                    )
+                }
+            } else {
+                CircularProgressIndicator(
+                    color = Color(0xFFB63B14),
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
             }
 
