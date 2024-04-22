@@ -257,6 +257,7 @@ fun profile_screen(navController: NavHostController, viewModel: UserViewModel) {
                     .clickable {
                         corrutineScope.launch {
                             viewModel.setData(false, "", "", "", "")
+                            viewModel.logoutCafeUser()
                             navController.navigate("LoginScreen")
                         }
                     }

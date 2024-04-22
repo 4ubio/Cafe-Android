@@ -106,61 +106,64 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
 
                     Text(
                         text = "No. ${viewModel.order.id}",
-                        fontSize = 25.sp,
+                        fontSize = 30.sp,
                         fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(horizontal = 30.dp)
+                        modifier = Modifier.padding(horizontal = 30.dp).align(Alignment.CenterHorizontally)
                     )
 
                     Spacer(modifier = Modifier.height(15.dp))
 
-                    Row(
-                        modifier = Modifier
-                            .background(
-                                Color(0xFFD2CECE),
-                                shape = RoundedCornerShape(20.dp)
-                            )
-                            .padding(horizontal = 10.dp, vertical = 20.dp)
-                            .widthIn(max = 400.dp, min = 350.dp)
-                            .align(Alignment.CenterHorizontally)
+                    Column (
+                        modifier = Modifier.padding(horizontal = 25.dp)
                     ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.food_icon),
-                            contentDescription = "Food",
+                        Row(
                             modifier = Modifier
-                                .weight(0.8f)
-                                .size(100.dp)
-                                .clip(shape = RoundedCornerShape(20.dp))
-                        )
-
-                        Spacer(modifier = Modifier.width(20.dp))
-
-                        Column(
-                            modifier = Modifier
-                                .weight(1f)
-                                .align(Alignment.CenterVertically)
+                                .background(
+                                    Color(0xFFD2CECE),
+                                    shape = RoundedCornerShape(20.dp)
+                                )
+                                .padding(horizontal = 10.dp, vertical = 20.dp)
+                                .widthIn(max = 400.dp, min = 350.dp)
+                                .align(Alignment.CenterHorizontally)
                         ) {
-                            Text(
-                                text = viewModel.order.nombre_platillo,
-                                fontSize = 22.sp,
-                                fontWeight = FontWeight.Bold,
+                            Image(
+                                painter = painterResource(id = R.drawable.food_icon),
+                                contentDescription = "Food",
+                                modifier = Modifier
+                                    .weight(0.8f)
+                                    .size(100.dp)
+                                    .clip(shape = RoundedCornerShape(20.dp))
                             )
 
-                            Spacer(modifier = Modifier.height(5.dp))
+                            Spacer(modifier = Modifier.width(20.dp))
 
-                            Text(
-                                text = "$${viewModel.order.total} mxn",
-                                fontSize = 18.sp,
-                                fontStyle = FontStyle.Italic
-                            )
+                            Column(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .align(Alignment.CenterVertically)
+                            ) {
+                                Text(
+                                    text = viewModel.order.nombre_platillo,
+                                    fontSize = 22.sp,
+                                    fontWeight = FontWeight.Bold,
+                                )
 
-                            Spacer(modifier = Modifier.height(5.dp))
+                                Spacer(modifier = Modifier.height(5.dp))
 
-                            Text(
-                                text = "Cantidad: ${viewModel.order.cantidad}",
-                                fontSize = 18.sp,
-                                fontStyle = FontStyle.Italic
-                            )
+                                Text(
+                                    text = "$${viewModel.order.total} mxn",
+                                    fontSize = 18.sp,
+                                    fontStyle = FontStyle.Italic
+                                )
+
+                                Spacer(modifier = Modifier.height(5.dp))
+
+                                Text(
+                                    text = "Cantidad: ${viewModel.order.cantidad}",
+                                    fontSize = 18.sp,
+                                    fontStyle = FontStyle.Italic
+                                )
+                            }
                         }
                     }
 

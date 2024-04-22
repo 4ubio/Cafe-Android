@@ -45,6 +45,12 @@ class UserViewModel(val context: Context) : ViewModel() {
         }
     }
 
+    fun logoutCafeUser() {
+        viewModelScope.launch {
+            isAuthed = false
+        }
+    }
+
     //Save Login Data
     companion object {
         val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "UserData")

@@ -96,52 +96,56 @@ fun cart_screen(
                 )
             }
 
-            Row (
-                modifier = Modifier
-                    .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
-                    .padding(10.dp)
-                    .widthIn(max = 400.dp, min = 350.dp)
-                    .align(Alignment.CenterHorizontally)
+            Column (
+                modifier = Modifier.padding(horizontal = 25.dp)
             ) {
-
-                AsyncImage(
-                    model = "https://lacafe3.000webhostapp.com/food/$foto",
-                    placeholder = painterResource(id = R.drawable.food_icon),
-                    error = painterResource(id = R.drawable.food_icon),
-                    contentDescription = nombre,
+                Row(
                     modifier = Modifier
-                        .weight(0.8f)
-                        .clip(shape = RoundedCornerShape(20.dp))
-                )
-
-                Spacer(modifier = Modifier.width(20.dp))
-
-                Column (
-                    modifier = Modifier
-                        .weight(1f)
-                        .align(Alignment.CenterVertically)
+                        .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
+                        .padding(10.dp)
+                        .widthIn(max = 400.dp, min = 350.dp)
+                        .align(Alignment.CenterHorizontally)
                 ) {
-                    Text (
-                        text = nombre,
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold,
+
+                    AsyncImage(
+                        model = "https://lacafe3.000webhostapp.com/food/$foto",
+                        placeholder = painterResource(id = R.drawable.food_icon),
+                        error = painterResource(id = R.drawable.food_icon),
+                        contentDescription = nombre,
+                        modifier = Modifier
+                            .weight(0.8f)
+                            .clip(shape = RoundedCornerShape(20.dp))
                     )
 
-                    Spacer(modifier = Modifier.height(5.dp))
+                    Spacer(modifier = Modifier.width(20.dp))
 
-                    Text(
-                        text = "$$precio mxn",
-                        fontSize = 18.sp,
-                        fontStyle = FontStyle.Italic
-                    )
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                            .align(Alignment.CenterVertically)
+                    ) {
+                        Text(
+                            text = nombre,
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.Bold,
+                        )
 
-                    Spacer(modifier = Modifier.height(5.dp))
+                        Spacer(modifier = Modifier.height(5.dp))
 
-                    Text(
-                        text = "Cantidad: $cantidad",
-                        fontSize = 18.sp,
-                        fontStyle = FontStyle.Italic
-                    )
+                        Text(
+                            text = "$$precio mxn",
+                            fontSize = 18.sp,
+                            fontStyle = FontStyle.Italic
+                        )
+
+                        Spacer(modifier = Modifier.height(5.dp))
+
+                        Text(
+                            text = "Cantidad: $cantidad",
+                            fontSize = 18.sp,
+                            fontStyle = FontStyle.Italic
+                        )
+                    }
                 }
             }
 

@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -53,6 +54,7 @@ fun login_screen(navController: NavHostController, viewModel: UserViewModel) {
     var password by remember { mutableStateOf("") }
 
     val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
     val corrutineScope = rememberCoroutineScope()
 
     //Listen for isAuthing changes
@@ -174,7 +176,7 @@ fun login_screen(navController: NavHostController, viewModel: UserViewModel) {
 
                     Button(
                         onClick = {
-                            navController.navigate("RegisterScreen")
+                            uriHandler.openUri("https://lacafe3.000webhostapp.com/register.php?message=1")
                         },
                         colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
                         modifier = Modifier

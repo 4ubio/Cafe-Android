@@ -13,16 +13,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,12 +46,16 @@ import com.example.cafe.viewmodels.FoodViewModel
 @Composable
 fun item_screen(navController: NavHostController, viewModel: FoodViewModel, id: String) {
 
+    //Variables
+    val items = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
+    var selectedIndex by remember { mutableStateOf(0) }
+    var expanded by remember { mutableStateOf(false) }
+    var cant = items[selectedIndex]
+
     //Load Item
     LaunchedEffect(Unit, block = {
         viewModel.getFoodItem(id)
     })
-
-    val cantidad = "1"
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -62,13 +71,17 @@ fun item_screen(navController: NavHostController, viewModel: FoodViewModel, id: 
                         error = painterResource(id = R.drawable.food_icon),
                         contentDescription = viewModel.food.nombre,
                         contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxWidth().aspectRatio(16f / 9f)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(16f / 9f)
                     )
 
                     Button(
                         onClick = { navController.popBackStack() },
                         colors = ButtonDefaults.buttonColors(Color(0xFFFFFFFF)),
-                        modifier = Modifier.padding(15.dp).width(70.dp)
+                        modifier = Modifier
+                            .padding(15.dp)
+                            .width(70.dp)
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.arrow_back),
@@ -81,76 +94,114 @@ fun item_screen(navController: NavHostController, viewModel: FoodViewModel, id: 
 
                 Spacer(modifier = Modifier.height(15.dp))
 
-                Column (
-                    modifier = Modifier
-                        .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
-                        .padding(10.dp)
-                        .widthIn(min = 300.dp, max = 380.dp)
-                        .align(Alignment.CenterHorizontally)
+                Row (
+                    modifier = Modifier.padding(horizontal = 25.dp)
                 ) {
-                    Text(
-                        text = viewModel.food.nombre,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 30.sp,
-                        modifier = Modifier.align(Alignment.CenterHorizontally)
-                    )
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    Text(
-                        text = viewModel.food.descripcion,
-                        fontSize = 20.sp,
-                    )
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    Text(
-                        text = "Tiempo de preparación: ${viewModel.food.tiempo} minutos",
-                        fontSize = 20.sp,
-                    )
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    Text(
-                        text = "Estado: ${viewModel.food.estado}",
-                        fontSize = 20.sp,
-                    )
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    Text(
-                        text = "Cantidad:",
-                        fontSize = 20.sp,
-                    )
-
-                    Spacer(modifier = Modifier.height(10.dp))
-
-                    Button(
-                        onClick = {navController.navigate("CartScreen/" +
-                                                                    "${viewModel.food.id}/" +
-                                                                    "${viewModel.food.nombre}/" +
-                                                                    "${viewModel.food.foto}/" +
-                                                                    "${viewModel.food.precio}/" +
-                                                                    "${cantidad}/"
-                        )},
-                        colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
+                    Column(
                         modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
+                            .background(Color(0xFFD2CECE), shape = RoundedCornerShape(20.dp))
+                            .padding(15.dp)
                             .fillMaxWidth()
-                            .padding(horizontal = 20.dp)
                     ) {
                         Text(
-                            text = "Seleccionar   $${viewModel.food.precio} mxn",
+                            text = viewModel.food.nombre,
                             fontWeight = FontWeight.Bold,
-                            color = Color(0xFFFFFFFF),
-                            fontSize = 20.sp
+                            fontSize = 30.sp,
+                            modifier = Modifier.align(Alignment.CenterHorizontally)
                         )
+
+                        Spacer(modifier = Modifier.height(15.dp))
+
+                        Text(
+                            text = viewModel.food.descripcion,
+                            fontSize = 20.sp,
+                        )
+
+                        Spacer(modifier = Modifier.height(15.dp))
+
+                        Text(
+                            text = "Tiempo de preparación: ${viewModel.food.tiempo} minutos",
+                            fontSize = 20.sp,
+                        )
+
+                        Spacer(modifier = Modifier.height(15.dp))
+
+                        Text(
+                            text = "Estado: ${viewModel.food.estado}",
+                            fontSize = 20.sp,
+                        )
+
+                        Spacer(modifier = Modifier.height(15.dp))
+
+                        //Select cant button
+                        Row (
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "Cantidad: ",
+                                fontSize = 20.sp
+                            )
+
+                            Spacer(modifier = Modifier.width(10.dp))
+
+                            Button(
+                                onClick = {expanded = true},
+                                colors = ButtonDefaults.buttonColors(Color(0xFF6B869E)),
+                            ){
+                                Text(text = "$cant")
+                            }
+
+                            DropdownMenu(
+                                expanded = expanded,
+                                onDismissRequest = {expanded = false},
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                items.forEachIndexed {index, cant ->
+                                    DropdownMenuItem(
+                                        text = {
+                                            Text(text = cant)
+                                        }, onClick = {
+                                            selectedIndex = index
+                                            expanded = false
+                                        })
+                                }
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        Button(
+                            onClick = {
+                                navController.navigate(
+                                    "CartScreen/" +
+                                            "${viewModel.food.id}/" +
+                                            "${viewModel.food.nombre}/" +
+                                            "${viewModel.food.foto}/" +
+                                            "${viewModel.food.precio}/" +
+                                            "${cant}/"
+                                )
+                            },
+                            colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .fillMaxWidth()
+                                .padding(horizontal = 20.dp)
+                        ) {
+                            Text(
+                                text = "Seleccionar   $${viewModel.food.precio} mxn",
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFFFFFFFF),
+                                fontSize = 20.sp
+                            )
+                        }
                     }
                 }
             } else {
                 Column (
                     verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.weight(30f).fillMaxWidth()
+                    modifier = Modifier
+                        .weight(30f)
+                        .fillMaxWidth()
                 ) {
                     CircularProgressIndicator(
                         color = Color(0xFFB63B14),
