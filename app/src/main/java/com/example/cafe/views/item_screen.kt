@@ -58,14 +58,13 @@ fun item_screen(navController: NavHostController, foodViewModel: FoodViewModel, 
     val items = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
     var selectedIndex by remember { mutableStateOf(0) }
     var expanded by remember { mutableStateOf(false) }
+    var cant = items[selectedIndex]
 
     //Current Hour
     val actualDate = LocalTime.now()
     val format = DateTimeFormatter.ofPattern("HH:mm:ss")
     val actualHourString = actualDate.format(format)
     val actualHour = LocalTime.parse(actualHourString, format)
-
-    var cant = items[selectedIndex]
 
     //Load Item
     LaunchedEffect(Unit, block = {
