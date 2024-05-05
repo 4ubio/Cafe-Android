@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cafe</string>
+    <string name="email_text">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Log in</string>
+    <string name="Sign_up">Sign up</string>
+    <string name="Email_or_pass">Email or password incorrect</string>
+    <string name="name">Name</string>
+    <string name="lastname">LastName</string>
+    <string name="register">Register</string>
+    <string name="login2">or Log in</string>
+    <string name="cart">Cart</string>
+    <string name="amount">Amount</string>
+    <string name="pay">To pay</string>
+    <string name="order">Order received</string>
+    <string name="order_text">Your order has been received and you will be able to pick up your order soon.</string>
+    <string name="go_to_orders">Go to orders</string>
+    <string name="welcome">¡Welcome!</string>
+    <string name="elige_cafe">Choose your cafeteria</string>
+    <string name="no_available">Item not available at the moment</string>
+    <string name="no_available2">This item isn\'t available in this hours. Please check out later</string>
+    <string name="blocked">You are currently blocked from the platform for misuse.</string>
+    <string name="available">Available</string>
+    <string name="select">Select</string>
+    <string name="your_order">Your order</string>
+    <string name="pickup">Pick up at</string>
+    <string name="order_date">Date of the order</string>
+    <string name="order_time">Time of the order</string>
+    <string name="in_preparation">In preparation</string>
+    <string name="ready">Ready to pick up</string>
+    <string name="history">Order history</string>
+    <string name="watch">Watch</string>
+    <string name="see_orders">See your order history</string>
+    <string name="configuration">Configuration</string>
+    <string name="news">News</string>
+    <string name="notifications">Notifications</string>
+    <string name="comments">Comments</string>
+    <string name="creators">Creators</string>
+    <string name="sign_out">Sign out</string>
+</resources>

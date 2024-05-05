@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -58,7 +59,7 @@ fun orders_screen(navController: NavHostController, orderViewModel: OrderViewMod
         ) {
             //Content
             Text(
-                text = "Historial de pedidos",
+                (stringResource(id=R.string.history)),       //Texto en ambos idiomas
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
@@ -126,7 +127,7 @@ fun orders_screen(navController: NavHostController, orderViewModel: OrderViewMod
                                 Spacer(modifier = Modifier.height(5.dp))
 
                                 Text(
-                                    text = "Cantidad: ${order.cantidad}",
+                                    text = "Cantidad: ${order.cantidad}",    //PENDIENTE TRADUCCION
                                     fontSize = 18.sp,
                                     fontStyle = FontStyle.Italic
                                 )
@@ -139,7 +140,7 @@ fun orders_screen(navController: NavHostController, orderViewModel: OrderViewMod
                                     modifier = Modifier.fillMaxWidth()
                                 ) {
                                     Text(
-                                        text = "Ver",
+                                        (stringResource(id=R.string.select)),  //Texto en ambos idiomas
                                         fontWeight = FontWeight.Bold,
                                         color = Color(0xFFFFFFFF),
                                         fontSize = 15.sp

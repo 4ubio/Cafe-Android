@@ -36,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -95,7 +96,7 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
                         }
 
                         Text(
-                            text = "Tu pedido",
+                            (stringResource(id=R.string.your_order)),       //Texto en ambos idiomas
                             fontSize = 30.sp,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.align(Alignment.Center)
@@ -159,7 +160,7 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
                                 Spacer(modifier = Modifier.height(5.dp))
 
                                 Text(
-                                    text = "Cantidad: ${viewModel.order.cantidad}",
+                                    text = "Cantidad: ${viewModel.order.cantidad}",//PENDIENTE TRAUDUCCION
                                     fontSize = 18.sp,
                                     fontStyle = FontStyle.Italic
                                 )
@@ -176,7 +177,7 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Recoger en:",
+                            (stringResource(id=R.string.pickup)),       //Texto en ambos idiomas
                             fontSize = 20.sp,
                             fontStyle = FontStyle.Italic,
                             fontWeight = FontWeight.Light
@@ -198,7 +199,7 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Fecha de pedido:",
+                            (stringResource(id=R.string.order_date)),       //Texto en ambos idiomas
                             fontSize = 20.sp,
                             fontStyle = FontStyle.Italic,
                             fontWeight = FontWeight.Light
@@ -220,7 +221,7 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Hora de pedido:",
+                            (stringResource(id=R.string.order_time)),    //Texto en ambos idiomas
                             fontSize = 20.sp,
                             fontStyle = FontStyle.Italic,
                             fontWeight = FontWeight.Light
@@ -278,9 +279,9 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
                         Spacer(modifier = Modifier.height(10.dp))
 
                         //Set progress
-                        if (viewModel.order.estado == "En preparación") {
+                        if (viewModel.order.estado == (stringResource(id=R.string.in_preparation))){       //Texto en ambos idiomas
                             progress = 0.33f
-                        } else if (viewModel.order.estado == "Listo para recoger") {
+                        } else if (viewModel.order.estado == (stringResource(id=R.string.ready))) {  //Texto en ambos idiomas
                             progress = 0.66f
                         } else {
                             progress = 1f

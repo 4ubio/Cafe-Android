@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -110,7 +111,7 @@ fun profile_screen(navController: NavHostController, viewModel: UserViewModel) {
                 Spacer(modifier = Modifier.width(15.dp))
 
                 Text(
-                    text = "Ver tu historial de pedidos",
+                    (stringResource(id=R.string.see_orders)),    //Texto en ambos idiomas
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
@@ -136,7 +137,7 @@ fun profile_screen(navController: NavHostController, viewModel: UserViewModel) {
                 Spacer(modifier = Modifier.width(15.dp))
 
                 Text(
-                    text = "Configuración",
+                    (stringResource(id=R.string.configuration)),    //Texto en ambos idiomas
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
@@ -162,7 +163,7 @@ fun profile_screen(navController: NavHostController, viewModel: UserViewModel) {
                 Spacer(modifier = Modifier.width(15.dp))
 
                 Text(
-                    text = "Novedades",
+                    (stringResource(id=R.string.news)),    //Texto en ambos idiomas
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
@@ -188,7 +189,7 @@ fun profile_screen(navController: NavHostController, viewModel: UserViewModel) {
                 Spacer(modifier = Modifier.width(15.dp))
 
                 Text(
-                    text = "Notificaciones",
+                    (stringResource(id=R.string.notifications)),    //Texto en ambos idiomas
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
@@ -214,7 +215,7 @@ fun profile_screen(navController: NavHostController, viewModel: UserViewModel) {
                 Spacer(modifier = Modifier.width(15.dp))
 
                 Text(
-                    text = "Comentarios",
+                    (stringResource(id=R.string.comments)),    //Texto en ambos idiomas
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
@@ -240,7 +241,7 @@ fun profile_screen(navController: NavHostController, viewModel: UserViewModel) {
                 Spacer(modifier = Modifier.width(15.dp))
 
                 Text(
-                    text = "Creadores",
+                    (stringResource(id=R.string.creators)),    //Texto en ambos idiomas
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
@@ -272,7 +273,7 @@ fun profile_screen(navController: NavHostController, viewModel: UserViewModel) {
                 Spacer(modifier = Modifier.width(15.dp))
 
                 Text(
-                    text = "Cerrar Sesión",
+                    (stringResource(id=R.string.sign_out)),    //Texto en ambos idiomas
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )

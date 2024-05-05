@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,9 +44,7 @@ import com.example.cafe.ui.theme.nexa
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun home_screen(navController: NavHostController) {
-
     var sizeImage by remember { mutableStateOf(IntSize.Zero) }
-
     val gradient = Brush.verticalGradient(
         colors = listOf(Color.Transparent, Color.Black),
         startY = sizeImage.height.toFloat()/5,
@@ -59,7 +58,7 @@ fun home_screen(navController: NavHostController) {
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = "¡Bienvenido!",
+                (stringResource(id = R.string.welcome)),    //Texto en ambos idiomas
                 fontSize = 35.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
@@ -70,7 +69,7 @@ fun home_screen(navController: NavHostController) {
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = "Elige tu cafetería",
+                (stringResource(id = R.string.elige_cafe)),   //Texto en ambos idiomas
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,

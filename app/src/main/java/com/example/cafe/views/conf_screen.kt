@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -64,7 +65,7 @@ fun conf_screen(navController: NavHostController) {
             Spacer(modifier = Modifier.height(20.dp))
 
             Text(
-                text = "Orden recibida",
+                (stringResource(id=R.string.order)),   //Texto en ambos idiomas
                 fontWeight = FontWeight.Bold,
                 fontSize = 30.sp,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -73,7 +74,7 @@ fun conf_screen(navController: NavHostController) {
             Spacer(modifier = Modifier.height(20.dp))
 
             Text(
-                text = "Tu orden ha sido recibida correctamente  y pronto podrás pasar por tu pedido.",
+                (stringResource(id=R.string.order_text)),  //Texto en ambos idiomas
                 textAlign = TextAlign.Center,
                 fontSize = 20.sp,
                 fontStyle = FontStyle.Italic,
@@ -91,7 +92,7 @@ fun conf_screen(navController: NavHostController) {
                     .padding(horizontal = 30.dp)
             ) {
                 Text(
-                    text = "Ir a pedidos",
+                    (stringResource(id=R.string.go_to_orders)),   //Texto en ambos idiomas
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFFFFFFFF),
                     fontSize = 20.sp

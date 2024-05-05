@@ -36,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -58,14 +59,13 @@ fun item_screen(navController: NavHostController, foodViewModel: FoodViewModel, 
     val items = listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
     var selectedIndex by remember { mutableStateOf(0) }
     var expanded by remember { mutableStateOf(false) }
+    var cant = items[selectedIndex]
 
     //Current Hour
     val actualDate = LocalTime.now()
     val format = DateTimeFormatter.ofPattern("HH:mm:ss")
     val actualHourString = actualDate.format(format)
     val actualHour = LocalTime.parse(actualHourString, format)
-
-    var cant = items[selectedIndex]
 
     //Load Item
     LaunchedEffect(Unit, block = {
@@ -136,14 +136,14 @@ fun item_screen(navController: NavHostController, foodViewModel: FoodViewModel, 
                         Spacer(modifier = Modifier.height(15.dp))
 
                         Text(
-                            text = "Tiempo de preparación: ${foodViewModel.food.tiempo} minutos",
+                            text = "Tiempo de preparación: ${foodViewModel.food.tiempo} minutos",  //PENDIENTE TRADUCCION
                             fontSize = 20.sp,
                         )
 
                         Spacer(modifier = Modifier.height(15.dp))
 
                         Text(
-                            text = "Estado: ${foodViewModel.food.estado}",
+                            text = "Estado: ${foodViewModel.food.estado}",     //PENDIENTE TRADUCCION
                             fontSize = 20.sp,
                         )
 
@@ -151,7 +151,7 @@ fun item_screen(navController: NavHostController, foodViewModel: FoodViewModel, 
 
                         if (userViewModel.userStatus != "Activo") {
                             Text(
-                                text = "Actualmente te encuentras bloqueado de la plataforma por mal uso. ",
+                                (stringResource(id = R.string.blocked)),   //Texto en ambos idiomas
                                 modifier = Modifier.align(Alignment.CenterHorizontally),
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 20.sp
@@ -161,14 +161,14 @@ fun item_screen(navController: NavHostController, foodViewModel: FoodViewModel, 
                             actualHour.isAfter(LocalTime.parse(foodViewModel.food.hora_fin, format))
                         ) {
                             Text(
-                                text = "Este platillo no esta disponible dentro de este horario. Por favor, revisa más tarde.",
+                                (stringResource(id = R.string.no_available2)),   //Texto en ambos idiomas
                                 modifier = Modifier.align(Alignment.CenterHorizontally),
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 20.sp
                             )
-                        } else if (foodViewModel.food.estado != "Disponible") {
+                        } else if (foodViewModel.food.estado != (stringResource(id = R.string.available))) {  //Texto en ambos idiomas
                             Text(
-                                text = "Platillo no disponible por el momento",
+                                (stringResource(id = R.string.no_available)),   //Texto en ambos idiomas
                                 modifier = Modifier.align(Alignment.CenterHorizontally),
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 20.sp
@@ -180,7 +180,7 @@ fun item_screen(navController: NavHostController, foodViewModel: FoodViewModel, 
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = "Cantidad: ",
+                                    (stringResource(id = R.string.amount)),   //Texto en ambos idiomas
                                     fontSize = 20.sp
                                 )
 
@@ -230,7 +230,7 @@ fun item_screen(navController: NavHostController, foodViewModel: FoodViewModel, 
                                     .padding(horizontal = 20.dp)
                             ) {
                                 Text(
-                                    text = "Seleccionar   $${foodViewModel.food.precio} mxn",
+                                    text = "Seleccionar   $${foodViewModel.food.precio} mxn",   //PENDIENTE TRADUCCION
                                     fontWeight = FontWeight.Bold,
                                     color = Color(0xFFFFFFFF),
                                     fontSize = 20.sp

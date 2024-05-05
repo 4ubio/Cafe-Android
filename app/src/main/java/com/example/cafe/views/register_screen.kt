@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -86,7 +87,7 @@ fun register_screen(navController: NavHostController) {
                 OutlinedTextField(
                     value = mail,
                     onValueChange = { mail = it },
-                    label = { Text("Correo Institucional") },
+                    label = { Text(stringResource(id = R.string.email_text)) },
                     leadingIcon = {
                         Icon(
                             painter = painterResource(id = R.drawable.email),
@@ -105,7 +106,7 @@ fun register_screen(navController: NavHostController) {
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("Nombre") },
+                    label = { Text(stringResource(id = R.string.name)) },   //Texto en ambos idiomas
                     leadingIcon = {
                         Icon(
                             painter = painterResource(id = R.drawable.person),
@@ -124,7 +125,7 @@ fun register_screen(navController: NavHostController) {
                 OutlinedTextField(
                     value = lastname,
                     onValueChange = { lastname = it },
-                    label = { Text("Apellido") },
+                    label = { Text(stringResource(id = R.string.lastname)) },   //Texto en ambos idiomas
                     leadingIcon = {
                         Icon(
                             painter = painterResource(id = R.drawable.person),
@@ -162,7 +163,7 @@ fun register_screen(navController: NavHostController) {
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
-                    label = { Text("Contraseña") },
+                    label = { Text(stringResource(id = R.string.password)) },    //Texto en ambos idiomas
                     leadingIcon = {
                         Icon(
                             painter = painterResource(id = R.drawable.lock),
@@ -191,7 +192,7 @@ fun register_screen(navController: NavHostController) {
                         .padding(horizontal = 30.dp)
                 ) {
                     Text(
-                        text = "Registrarse",
+                        (stringResource(id = R.string.register)),      //Texto en ambos idiomas
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFFFFFFFF),
                         fontSize = 20.sp
@@ -211,7 +212,7 @@ fun register_screen(navController: NavHostController) {
                         .padding(horizontal = 30.dp)
                 ) {
                     Text(
-                        text = "O inicia sesión",
+                        (stringResource(id = R.string.login2)),   //Texto en ambos idiomas
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFF000000),
                         fontSize = 20.sp

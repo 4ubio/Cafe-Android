@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -86,7 +87,7 @@ fun cart_screen(
                 }
 
                 Text(
-                    text = "Carrito",
+                    (stringResource(id=R.string.cart)),    //Texto en ambos idiomas
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.align(Alignment.Center)
@@ -138,7 +139,7 @@ fun cart_screen(
                         Spacer(modifier = Modifier.height(5.dp))
 
                         Text(
-                            text = "Cantidad: $cantidad",
+                            (stringResource(id=R.string.amount)),    //Texto en ambos idiomas
                             fontSize = 18.sp,
                             fontStyle = FontStyle.Italic
                         )
@@ -208,7 +209,7 @@ fun cart_screen(
                         .padding(horizontal = 30.dp)
                 ) {
                     Text(
-                        text = "Realizar pago",
+                        (stringResource(id=R.string.pay)),       //Texto en ambos idiomas
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFFFFFFFF),
                         fontSize = 20.sp
