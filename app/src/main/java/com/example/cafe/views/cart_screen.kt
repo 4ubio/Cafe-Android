@@ -139,7 +139,7 @@ fun cart_screen(
                         Spacer(modifier = Modifier.height(5.dp))
 
                         Text(
-                            (stringResource(id=R.string.amount)),    //Texto en ambos idiomas
+                            text = "${stringResource(id=R.string.amount)}: $cantidad",    //Texto en ambos idiomas
                             fontSize = 18.sp,
                             fontStyle = FontStyle.Italic
                         )

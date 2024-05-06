@@ -279,9 +279,9 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
                         Spacer(modifier = Modifier.height(10.dp))
 
                         //Set progress
-                        if (viewModel.order.estado == (stringResource(id=R.string.in_preparation))){       //Texto en ambos idiomas
+                        if (viewModel.order.estado == "En preparación"){       //Texto en ambos idiomas
                             progress = 0.33f
-                        } else if (viewModel.order.estado == (stringResource(id=R.string.ready))) {  //Texto en ambos idiomas
+                        } else if (viewModel.order.estado == "Listo para recoger") {  //Texto en ambos idiomas
                             progress = 0.66f
                         } else {
                             progress = 1f

@@ -166,7 +166,7 @@ fun item_screen(navController: NavHostController, foodViewModel: FoodViewModel, 
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 20.sp
                             )
-                        } else if (foodViewModel.food.estado != (stringResource(id = R.string.available))) {  //Texto en ambos idiomas
+                        } else if (foodViewModel.food.estado != "Disponible") {  //Texto en ambos idiomas
                             Text(
                                 (stringResource(id = R.string.no_available)),   //Texto en ambos idiomas
                                 modifier = Modifier.align(Alignment.CenterHorizontally),
