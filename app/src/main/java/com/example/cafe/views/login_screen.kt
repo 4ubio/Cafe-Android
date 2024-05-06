@@ -36,7 +36,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -74,7 +73,7 @@ fun login_screen(navController: NavHostController, viewModel: UserViewModel) {
 
         } else if (viewModel.isAuthFailed) {                //Else, show message
             Toast.makeText(context, "Correo o contraseña incorrectos.", Toast.LENGTH_LONG).show()
-        }                               //PENDIENTE TRADUCCIÓN
+        }
     })
 
     Box(
@@ -113,7 +112,7 @@ fun login_screen(navController: NavHostController, viewModel: UserViewModel) {
                 OutlinedTextField(
                     value = email,
                     onValueChange = { email = it },
-                    label = { Text(stringResource(id = R.string.email_text)) },      //Texto en ambos idiomas
+                    label = { Text("Correo Institucional") },
                     leadingIcon = {
                         Icon(
                             painter = painterResource(id = R.drawable.email),
@@ -132,7 +131,7 @@ fun login_screen(navController: NavHostController, viewModel: UserViewModel) {
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
-                    label = { Text(stringResource(id = R.string.password)) },     //Texto en ambos idiomas
+                    label = { Text("Contraseña") },
                     leadingIcon = {
                         Icon(
                             painter = painterResource(id = R.drawable.lock),
@@ -157,7 +156,7 @@ fun login_screen(navController: NavHostController, viewModel: UserViewModel) {
                                 viewModel.authCafeUser(email, password)
                             } else {
                                 Toast.makeText(context, "Faltan campos por llenar.", Toast.LENGTH_LONG).show()
-                            }                      //PENDIENTE TRADUCCION
+                            }
                         },
                         colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
                         modifier = Modifier
@@ -166,7 +165,7 @@ fun login_screen(navController: NavHostController, viewModel: UserViewModel) {
                             .padding(horizontal = 30.dp)
                     ) {
                         Text(
-                            (stringResource(id = R.string.login)),  //Texto en ambos idiomas
+                            text = "Iniciar Sesión",
                             fontWeight = FontWeight.Bold,
                             color = Color(0xFFFFFFFF),
                             fontSize = 20.sp
@@ -186,7 +185,7 @@ fun login_screen(navController: NavHostController, viewModel: UserViewModel) {
                             .padding(horizontal = 30.dp)
                     ) {
                         Text(
-                            (stringResource(id = R.string.Sign_up)),    //Texto en ambos idiomas
+                            text = "O registrate ya",
                             fontWeight = FontWeight.Bold,
                             color = Color(0xFF000000),
                             fontSize = 20.sp

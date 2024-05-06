@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Cafe</string>
     <string name="email_text">Correo Institucional</string>
+<<<<<<< HEAD
     <string name="password">Contraseña</string>
     <string name="login">Iniciar sesión</string>
     <string name="Sign_up">Registrarse</string>
@@ -38,4 +39,6 @@
     <string name="comments">Comentarios</string>
     <string name="creators">Creadores</string>
     <string name="sign_out">Cerrar sesion</string>
+=======
+>>>>>>> origin/master
 </resources>
