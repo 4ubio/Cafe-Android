@@ -119,7 +119,7 @@ fun orders_screen(navController: NavHostController, orderViewModel: OrderViewMod
                                 Spacer(modifier = Modifier.height(5.dp))
 
                                 Text(
-                                    text = "${order.total} mxn",
+                                    text = "$${order.total} mxn",
                                     fontSize = 18.sp,
                                     fontStyle = FontStyle.Italic
                                 )
@@ -127,7 +127,7 @@ fun orders_screen(navController: NavHostController, orderViewModel: OrderViewMod
                                 Spacer(modifier = Modifier.height(5.dp))
 
                                 Text(
-                                    text = "Cantidad: ${order.cantidad}",    //PENDIENTE TRADUCCION
+                                    text = "${stringResource(id = R.string.amount)}: ${order.cantidad}",    //PENDIENTE TRADUCCION
                                     fontSize = 18.sp,
                                     fontStyle = FontStyle.Italic
                                 )
@@ -155,7 +155,9 @@ fun orders_screen(navController: NavHostController, orderViewModel: OrderViewMod
             } else {
                 Column (
                     verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.weight(30f).fillMaxWidth()
+                    modifier = Modifier
+                        .weight(30f)
+                        .fillMaxWidth()
                 ) {
                     CircularProgressIndicator(
                         color = Color(0xFFB63B14),

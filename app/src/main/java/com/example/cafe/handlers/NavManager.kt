@@ -1,6 +1,8 @@
 package com.example.cafe.handlers
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
@@ -24,6 +26,7 @@ import com.example.cafe.views.profile_screen
 import com.example.cafe.views.register_screen
 import com.example.cafe.views.splash_screen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavManager() {
     val navController: NavHostController = rememberNavController()

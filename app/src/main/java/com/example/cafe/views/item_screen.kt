@@ -136,14 +136,14 @@ fun item_screen(navController: NavHostController, foodViewModel: FoodViewModel, 
                         Spacer(modifier = Modifier.height(15.dp))
 
                         Text(
-                            text = "Tiempo de preparación: ${foodViewModel.food.tiempo} minutos",  //PENDIENTE TRADUCCION
+                            text = "${stringResource(id = R.string.time)}: ${foodViewModel.food.tiempo} ${stringResource(id = R.string.minutes)}",  //PENDIENTE TRADUCCION
                             fontSize = 20.sp,
                         )
 
                         Spacer(modifier = Modifier.height(15.dp))
 
                         Text(
-                            text = "Estado: ${foodViewModel.food.estado}",     //PENDIENTE TRADUCCION
+                            text = "${stringResource(id = R.string.status)}: ${foodViewModel.food.estado}",     //PENDIENTE TRADUCCION
                             fontSize = 20.sp,
                         )
 
@@ -230,7 +230,7 @@ fun item_screen(navController: NavHostController, foodViewModel: FoodViewModel, 
                                     .padding(horizontal = 20.dp)
                             ) {
                                 Text(
-                                    text = "Seleccionar   $${foodViewModel.food.precio} mxn",   //PENDIENTE TRADUCCION
+                                    text = "${stringResource(id = R.string.select)}   $${foodViewModel.food.precio} mxn",   //PENDIENTE TRADUCCION
                                     fontWeight = FontWeight.Bold,
                                     color = Color(0xFFFFFFFF),
                                     fontSize = 20.sp

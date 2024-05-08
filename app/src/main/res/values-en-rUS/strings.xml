@@ -12,7 +12,7 @@
     <string name="login2">or Log in</string>
     <string name="cart">Cart</string>
     <string name="amount">Amount</string>
-    <string name="pay">To pay</string>
+    <string name="pay">Pay</string>
     <string name="order">Order received</string>
     <string name="order_text">Your order has been received and you will be able to pick up your order soon.</string>
     <string name="go_to_orders">Go to orders</string>
@@ -38,4 +38,9 @@
     <string name="comments">Comments</string>
     <string name="creators">Creators</string>
     <string name="sign_out">Sign out</string>
+    <string name="missing_fields">Fields are missing to fill in</string>
+    <string name="time">Preparation time</string>
+    <string name="minutes">minutes</string>
+    <string name="status">Status</string>
+    <string name="delivered">Delivered</string>
 </resources>

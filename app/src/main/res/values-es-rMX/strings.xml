@@ -38,5 +38,10 @@
     <string name="comments">Comentarios</string>
     <string name="creators">Creadores</string>
     <string name="sign_out">Cerrar sesion</string>
+    <string name="missing_fields">Faltan campos por llenar</string>
+    <string name="time">Tiempo de preparación</string>
+    <string name="minutes">minutos</string>
+    <string name="status">Estado</string>
+    <string name="delivered">Entregado</string>
 
 </resources>

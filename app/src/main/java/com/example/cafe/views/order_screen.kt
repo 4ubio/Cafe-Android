@@ -56,6 +56,7 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
     //Refresh and variables
     var refreshing by remember { mutableStateOf(false) }
     var progress = 0.0f
+    var status = ""
 
     //Load Order
     LaunchedEffect(refreshing, block = {
@@ -78,7 +79,9 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
                 //Display Food
                 if (viewModel.isLoaded_order) {
                     Box(
-                        modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState())
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .verticalScroll(rememberScrollState())
                     ) {
                         Button(
                             onClick = { navController.popBackStack() },
@@ -109,7 +112,9 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
                         text = "No. ${viewModel.order.id}",
                         fontSize = 30.sp,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(horizontal = 30.dp).align(Alignment.CenterHorizontally)
+                        modifier = Modifier
+                            .padding(horizontal = 30.dp)
+                            .align(Alignment.CenterHorizontally)
                     )
 
                     Spacer(modifier = Modifier.height(15.dp))
@@ -160,7 +165,7 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
                                 Spacer(modifier = Modifier.height(5.dp))
 
                                 Text(
-                                    text = "Cantidad: ${viewModel.order.cantidad}",//PENDIENTE TRAUDUCCION
+                                    text = "${stringResource(id = R.string.amount)}: ${viewModel.order.cantidad}",//PENDIENTE TRAUDUCCION
                                     fontSize = 18.sp,
                                     fontStyle = FontStyle.Italic
                                 )
@@ -266,26 +271,29 @@ fun order_screen(navController: NavHostController, viewModel: OrderViewModel, id
 
                     Spacer(modifier = Modifier.height(30.dp))
 
+                    //Set progress
+                    if (viewModel.order.estado == "En preparación"){       //Texto en ambos idiomas
+                        status = stringResource(id = R.string.in_preparation)
+                        progress = 0.33f
+                    } else if (viewModel.order.estado == "Listo para recoger") {  //Texto en ambos idiomas
+                        status = stringResource(id = R.string.ready)
+                        progress = 0.66f
+                    } else {
+                        status = stringResource(id = R.string.delivered)
+                        progress = 1f
+                    }
+
                     Column(
                         modifier = Modifier.padding(horizontal = 30.dp)
                     ) {
                         Text(
-                            text = viewModel.order.estado,
+                            text = status,
                             fontSize = 25.sp,
                             fontWeight = FontWeight.Bold,
                             textAlign = TextAlign.Center,
                         )
 
                         Spacer(modifier = Modifier.height(10.dp))
-
-                        //Set progress
-                        if (viewModel.order.estado == "En preparación"){       //Texto en ambos idiomas
-                            progress = 0.33f
-                        } else if (viewModel.order.estado == "Listo para recoger") {  //Texto en ambos idiomas
-                            progress = 0.66f
-                        } else {
-                            progress = 1f
-                        }
 
                         LinearProgressIndicator(
                             progress = progress,
