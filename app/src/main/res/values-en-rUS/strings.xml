@@ -16,7 +16,7 @@
     <string name="order">Order received</string>
     <string name="order_text">Your order has been received and you will be able to pick up your order soon.</string>
     <string name="go_to_orders">Go to orders</string>
-    <string name="welcome">¡Welcome!</string>
+    <string name="welcome">Welcome!</string>
     <string name="elige_cafe">Choose your cafeteria</string>
     <string name="no_available">Item not available at the moment</string>
     <string name="no_available2">This item isn\'t available in this hours. Please check out later</string>
