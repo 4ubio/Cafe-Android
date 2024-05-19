@@ -12,7 +12,7 @@
     <string name="login2">o Inicia sesión</string>
     <string name="cart">Carrito</string>
     <string name="amount">Cantidad</string>
-    <string name="pay">Realizar pago</string>
+    <string name="pay">Pagar con PayPal</string>
     <string name="order">Orden recibida</string>
     <string name="order_text">Tu orden ha sido recibida correctamente  y pronto podrás pasar por tu pedido.</string>
     <string name="go_to_orders">Ir a pedidos</string>
@@ -43,5 +43,7 @@
     <string name="minutes">minutos</string>
     <string name="status">Estado</string>
     <string name="delivered">Entregado</string>
+    <string name="order_cancel">Orden cancelada</string>
+    <string name="order_error">Error procesando tu orden</string>
 
 </resources>

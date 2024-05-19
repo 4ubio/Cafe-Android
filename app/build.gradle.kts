@@ -65,6 +65,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("com.google.accompanist:accompanist-swiperefresh:0.24.13-rc")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("com.paypal.checkout:android-sdk:0.112.2")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

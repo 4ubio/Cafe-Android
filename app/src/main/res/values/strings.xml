@@ -11,7 +11,7 @@
     <string name="login2">or Log in</string>
     <string name="cart">Cart</string>
     <string name="amount">Amount</string>
-    <string name="pay">Pay</string>
+    <string name="pay">Pay with PayPal</string>
     <string name="order">Order received</string>
     <string name="order_text">Your order has been received and you will be able to pick up your order soon.</string>
     <string name="go_to_orders">Go to orders</string>
@@ -42,4 +42,6 @@
     <string name="minutes">minutes</string>
     <string name="status">status</string>
     <string name="delivered">Delivered</string>
+    <string name="order_cancel">Order canceled</string>
+    <string name="order_error">Order error</string>
 </resources>

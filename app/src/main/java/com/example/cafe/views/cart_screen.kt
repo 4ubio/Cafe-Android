@@ -37,6 +37,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.cafe.R
 import com.example.cafe.components.Navbar
+import com.example.cafe.components.PayButton
 import com.example.cafe.viewmodels.OrderViewModel
 import com.example.cafe.viewmodels.UserViewModel
 
@@ -54,6 +55,8 @@ fun cart_screen(
 
     var name = userViewModel.name.collectAsState(initial = "")
     var id_iest = userViewModel.id_iest.collectAsState(initial = "")
+    val total = precio.toDouble() * cantidad.toInt()
+    val total_string = total.toString()
 
     LaunchedEffect(orderViewModel.isCreated_order, block = {
         if (orderViewModel.isCreated_order) {
@@ -163,7 +166,7 @@ fun cart_screen(
                 )
 
                 Text(
-                    text = "$${precio.toDouble() * cantidad.toInt()} mxn",
+                    text = "$${total} mxn",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Light
                 )
@@ -189,7 +192,7 @@ fun cart_screen(
                 )
 
                 Text(
-                    text = "$${precio.toDouble() * cantidad.toInt()} mxn",
+                    text = "$${total} mxn",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
@@ -198,23 +201,7 @@ fun cart_screen(
             Spacer(modifier = Modifier.height(15.dp))
 
             if (!orderViewModel.isSetting_order) {
-                Button(
-                    onClick = {
-                        orderViewModel.setUserOrder(id, cantidad, id_iest.value, name.value)
-                    },
-                    colors = ButtonDefaults.buttonColors(Color(0xFFB63B14)),
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .fillMaxWidth()
-                        .padding(horizontal = 30.dp)
-                ) {
-                    Text(
-                        (stringResource(id=R.string.pay)),       //Texto en ambos idiomas
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFFFFFFFF),
-                        fontSize = 20.sp
-                    )
-                }
+                PayButton(orderViewModel, total_string, id, cantidad, id_iest.value, name.value)
             } else {
                 CircularProgressIndicator(
                     color = Color(0xFFB63B14),
